@@ -5,12 +5,26 @@ import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
+import Dashboard from "./pages/Dashboard";
+import AnmeldungModule from "./pages/AnmeldungModule";
+import BankModule from "./pages/BankModule";
+import HealthInsuranceModule from "./pages/HealthInsuranceModule";
+import VisaModule from "./pages/VisaModule";
+import IntegrationCoursesModule from "./pages/IntegrationCoursesModule";
+import TaxIDModule from "./pages/TaxIDModule";
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
   return (
     <Switch>
       <Route path={"/"} component={Home} />
+      <Route path={"/dashboard"} component={Dashboard} />
+      <Route path={"/module/anmeldung"} component={AnmeldungModule} />
+      <Route path={"/module/bank"} component={BankModule} />
+      <Route path={"/module/health"} component={HealthInsuranceModule} />
+      <Route path={"/module/visa"} component={VisaModule} />
+      <Route path={"/module/integration"} component={IntegrationCoursesModule} />
+      <Route path={"/module/tax"} component={TaxIDModule} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />

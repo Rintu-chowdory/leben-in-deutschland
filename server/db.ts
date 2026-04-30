@@ -1,6 +1,6 @@
-import { eq } from "drizzle-orm";
+import { eq, and, or } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertUser, users } from "../drizzle/schema";
+import { InsertUser, users, subscriptions, moduleProgress, anmeldungOffices, bankRecommendations, healthInsuranceProviders, integrationCourses, visaPermitTypes } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -17,6 +17,8 @@ export async function getDb() {
   }
   return _db;
 }
+
+// ============ USER & AUTH ============
 
 export async function upsertUser(user: InsertUser): Promise<void> {
   if (!user.openId) {
@@ -89,4 +91,166 @@ export async function getUserByOpenId(openId: string) {
   return result.length > 0 ? result[0] : undefined;
 }
 
-// TODO: add feature queries here as your schema grows.
+// ============ SUBSCRIPTIONS ============
+
+export async function getOrCreateSubscription(userId: number) {
+  const db = await getDb();
+  if (!db) return null;
+
+  let result = await db.select().from(subscriptions).where(eq(subscriptions.userId, userId)).limit(1);
+  
+  if (result.length === 0) {
+    await db.insert(subscriptions).values({
+      userId,
+      tier: 'free',
+      status: 'active',
+    });
+    result = await db.select().from(subscriptions).where(eq(subscriptions.userId, userId)).limit(1);
+  }
+
+  return result[0] || null;
+}
+
+export async function updateSubscription(userId: number, data: Partial<typeof subscriptions.$inferInsert>) {
+  const db = await getDb();
+  if (!db) return null;
+
+  await db.update(subscriptions).set(data).where(eq(subscriptions.userId, userId));
+  
+  const result = await db.select().from(subscriptions).where(eq(subscriptions.userId, userId)).limit(1);
+  return result[0] || null;
+}
+
+// ============ MODULE PROGRESS ============
+
+export async function getOrCreateModuleProgress(userId: number, moduleName: string) {
+  const db = await getDb();
+  if (!db) return null;
+
+  let result = await db.select().from(moduleProgress).where(
+    and(eq(moduleProgress.userId, userId), eq(moduleProgress.moduleName, moduleName))
+  ).limit(1);
+  
+  if (result.length === 0) {
+    await db.insert(moduleProgress).values({
+      userId,
+      moduleName,
+      completionPercentage: 0,
+      checklistItems: [],
+      savedResources: [],
+    });
+    result = await db.select().from(moduleProgress).where(
+      and(eq(moduleProgress.userId, userId), eq(moduleProgress.moduleName, moduleName))
+    ).limit(1);
+  }
+
+  return result[0] || null;
+}
+
+export async function updateModuleProgress(userId: number, moduleName: string, data: Partial<typeof moduleProgress.$inferInsert>) {
+  const db = await getDb();
+  if (!db) return null;
+
+  await db.update(moduleProgress).set(data).where(
+    and(eq(moduleProgress.userId, userId), eq(moduleProgress.moduleName, moduleName))
+  );
+  
+  const result = await db.select().from(moduleProgress).where(
+    and(eq(moduleProgress.userId, userId), eq(moduleProgress.moduleName, moduleName))
+  ).limit(1);
+  return result[0] || null;
+}
+
+export async function getUserModuleProgress(userId: number) {
+  const db = await getDb();
+  if (!db) return [];
+
+  return await db.select().from(moduleProgress).where(eq(moduleProgress.userId, userId));
+}
+
+// ============ ANMELDUNG OFFICES ============
+
+export async function getAnmeldungOffices(city?: string) {
+  const db = await getDb();
+  if (!db) return [];
+
+  if (city) {
+    return await db.select().from(anmeldungOffices).where(eq(anmeldungOffices.city, city));
+  }
+  return await db.select().from(anmeldungOffices);
+}
+
+export async function getAllCities() {
+  const db = await getDb();
+  if (!db) return [];
+
+  const result = await db.selectDistinct({ city: anmeldungOffices.city }).from(anmeldungOffices);
+  return result.map(r => r.city);
+}
+
+// ============ BANK RECOMMENDATIONS ============
+
+export async function getBankRecommendations() {
+  const db = await getDb();
+  if (!db) return [];
+
+  return await db.select().from(bankRecommendations);
+}
+
+// ============ HEALTH INSURANCE PROVIDERS ============
+
+export async function getHealthInsuranceProviders(type?: 'gkv' | 'pkv') {
+  const db = await getDb();
+  if (!db) return [];
+
+  if (type) {
+    return await db.select().from(healthInsuranceProviders).where(eq(healthInsuranceProviders.type, type));
+  }
+  return await db.select().from(healthInsuranceProviders);
+}
+
+// ============ INTEGRATION COURSES ============
+
+export async function getIntegrationCourses(filters?: { city?: string; courseType?: string }) {
+  const db = await getDb();
+  if (!db) return [];
+
+  const conditions = [];
+  if (filters?.city) {
+    conditions.push(eq(integrationCourses.city, filters.city));
+  }
+  if (filters?.courseType) {
+    conditions.push(eq(integrationCourses.courseType, filters.courseType as any));
+  }
+
+  if (conditions.length === 0) {
+    return await db.select().from(integrationCourses);
+  }
+  
+  return await db.select().from(integrationCourses).where(and(...conditions));
+}
+
+export async function getCourseCities() {
+  const db = await getDb();
+  if (!db) return [];
+
+  const result = await db.selectDistinct({ city: integrationCourses.city }).from(integrationCourses);
+  return result.map(r => r.city);
+}
+
+// ============ VISA PERMIT TYPES ============
+
+export async function getVisaPermitTypes() {
+  const db = await getDb();
+  if (!db) return [];
+
+  return await db.select().from(visaPermitTypes);
+}
+
+export async function getVisaPermitByCode(code: string) {
+  const db = await getDb();
+  if (!db) return null;
+
+  const result = await db.select().from(visaPermitTypes).where(eq(visaPermitTypes.code, code)).limit(1);
+  return result[0] || null;
+}
