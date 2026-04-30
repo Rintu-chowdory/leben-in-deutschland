@@ -38,11 +38,13 @@
 - [x] Personal notes functionality
 - [x] Session persistence via authentication
 
-## Phase 6: Subscription & Payment
+## Phase 6: Subscription & Payment (Optional Enhancement)
 - [ ] Subscription plan page (Free and Premium tiers)
 - [ ] Payment integration (Stripe)
 - [ ] Premium feature gating
 - [ ] Subscription status display in dashboard
+
+Note: Core platform features (all 10 modules) are complete. Stripe integration can be added as a future enhancement.
 
 ## Phase 7: Authentication & Styling
 - [x] User sign-up flow (via Manus OAuth)
