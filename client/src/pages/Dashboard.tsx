@@ -39,7 +39,7 @@ export default function Dashboard() {
     return allProgress?.find(p => p.moduleName === moduleId) || null;
   };
 
-  const totalCompletion = allProgress ? Math.round(allProgress.reduce((sum, p) => sum + p.completionPercentage, 0) / allProgress.length) : 0;
+  const totalCompletion = allProgress && allProgress.length > 0 ? Math.round(allProgress.reduce((sum, p) => sum + p.completionPercentage, 0) / allProgress.length) : 0;
 
   return (
     <div className="min-h-screen bg-background">

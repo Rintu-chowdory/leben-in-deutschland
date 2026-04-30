@@ -20,7 +20,7 @@ CREATE TABLE `bankRecommendations` (
 	`monthlyFee` decimal(8,2),
 	`accountOpeningBonus` varchar(255),
 	`englishSupport` boolean DEFAULT false,
-	`features` json DEFAULT ('[]'),
+	`features` json,
 	`affiliateLink` varchar(500),
 	`rating` decimal(3,1),
 	`reviewCount` int DEFAULT 0,
@@ -35,7 +35,7 @@ CREATE TABLE `healthInsuranceProviders` (
 	`monthlyContribution` decimal(8,2),
 	`deductible` decimal(10,2),
 	`englishSupport` boolean DEFAULT false,
-	`features` json DEFAULT ('[]'),
+	`features` json,
 	`website` varchar(500),
 	`rating` decimal(3,1),
 	`reviewCount` int DEFAULT 0,
@@ -65,8 +65,8 @@ CREATE TABLE `moduleProgress` (
 	`userId` int NOT NULL,
 	`moduleName` varchar(100) NOT NULL,
 	`completionPercentage` int NOT NULL DEFAULT 0,
-	`checklistItems` json DEFAULT ('[]'),
-	`savedResources` json DEFAULT ('[]'),
+	`checklistItems` json,
+	`savedResources` json,
 	`personalNotes` text,
 	`startedAt` timestamp NOT NULL DEFAULT (now()),
 	`lastUpdated` timestamp NOT NULL DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP,
@@ -91,19 +91,24 @@ CREATE TABLE `visaPermitTypes` (
 	`name` varchar(255) NOT NULL,
 	`code` varchar(50) NOT NULL,
 	`description` text,
-	`eligibilityCriteria` json DEFAULT ('[]'),
-	`requiredDocuments` json DEFAULT ('[]'),
+	`eligibilityCriteria` json,
+	`requiredDocuments` json,
 	`processingTime` varchar(100),
 	`validityPeriod` varchar(100),
-	`applicationSteps` json DEFAULT ('[]'),
+	`applicationSteps` json,
 	`createdAt` timestamp NOT NULL DEFAULT (now()),
 	CONSTRAINT `visaPermitTypes_id` PRIMARY KEY(`id`),
 	CONSTRAINT `visaPermitTypes_code_unique` UNIQUE(`code`)
 );
 --> statement-breakpoint
-CREATE INDEX `anmeldungOffices_city_idx` ON `anmeldungOffices` (`city`);--> statement-breakpoint
-CREATE INDEX `integrationCourses_city_idx` ON `integrationCourses` (`city`);--> statement-breakpoint
-CREATE INDEX `integrationCourses_courseType_idx` ON `integrationCourses` (`courseType`);--> statement-breakpoint
-CREATE INDEX `moduleProgress_userId_idx` ON `moduleProgress` (`userId`);--> statement-breakpoint
-CREATE INDEX `moduleProgress_userId_moduleName_idx` ON `moduleProgress` (`userId`,`moduleName`);--> statement-breakpoint
+CREATE INDEX `anmeldungOffices_city_idx` ON `anmeldungOffices` (`city`);
+--> statement-breakpoint
+CREATE INDEX `integrationCourses_city_idx` ON `integrationCourses` (`city`);
+--> statement-breakpoint
+CREATE INDEX `integrationCourses_courseType_idx` ON `integrationCourses` (`courseType`);
+--> statement-breakpoint
+CREATE INDEX `moduleProgress_userId_idx` ON `moduleProgress` (`userId`);
+--> statement-breakpoint
+CREATE INDEX `moduleProgress_userId_moduleName_idx` ON `moduleProgress` (`userId`,`moduleName`);
+--> statement-breakpoint
 CREATE INDEX `subscriptions_userId_idx` ON `subscriptions` (`userId`);
