@@ -1,0 +1,236 @@
+[2026-04-30T10:57:47.940Z] Starting dev server with command: pnpm run dev
+[2026-04-30T10:57:48.772Z] 
+[2026-04-30T10:57:48.773Z] > leben-in-deutschland@1.0.0 dev /home/ubuntu/leben-in-deutschland
+[2026-04-30T10:57:48.773Z] > NODE_ENV=development tsx watch server/_core/index.ts
+[2026-04-30T10:57:48.773Z] 
+[2026-04-30T10:57:50.924Z] [OAuth] Initialized with baseURL: https://api.manus.im
+[2026-04-30T10:57:51.331Z] Server running on http://localhost:3000/
+[2026-04-30T11:01:01.222Z] 7:01:01 AM [tsx] change in ./drizzle/schema.ts Restarting...
+[2026-04-30T11:01:02.814Z] c[OAuth] Initialized with baseURL: https://api.manus.im
+[2026-04-30T11:01:03.045Z] Server running on http://localhost:3000/
+[2026-04-30T11:01:19.658Z] Dev server process group stopped
+[2026-04-30T11:01:19.660Z] ELIFECYCLE  Command failed.
+[2026-04-30T11:01:19.700Z] Dev server exited with code -15
+[2026-04-30T11:01:22.673Z] Starting dev server with command: pnpm run dev
+[2026-04-30T11:01:23.386Z] 
+[2026-04-30T11:01:23.387Z] > leben-in-deutschland@1.0.0 dev /home/ubuntu/leben-in-deutschland
+[2026-04-30T11:01:23.387Z] > NODE_ENV=development tsx watch server/_core/index.ts
+[2026-04-30T11:01:23.387Z] 
+[2026-04-30T11:01:24.840Z] [OAuth] Initialized with baseURL: https://api.manus.im
+[2026-04-30T11:01:24.937Z] Dev server process group stopped
+[2026-04-30T11:01:24.939Z] ELIFECYCLE  Command failed.
+[2026-04-30T11:01:25.060Z] Dev server exited with code -15
+[2026-04-30T11:01:27.947Z] Starting dev server with command: pnpm run dev
+[2026-04-30T11:01:28.615Z] 
+[2026-04-30T11:01:28.616Z] > leben-in-deutschland@1.0.0 dev /home/ubuntu/leben-in-deutschland
+[2026-04-30T11:01:28.616Z] > NODE_ENV=development tsx watch server/_core/index.ts
+[2026-04-30T11:01:28.617Z] 
+[2026-04-30T11:01:30.328Z] [OAuth] Initialized with baseURL: https://api.manus.im
+[2026-04-30T11:01:30.550Z] Server running on http://localhost:3000/
+[2026-04-30T11:02:27.683Z] 7:02:27 AM [tsx] change in ./server/db.ts Restarting...
+[2026-04-30T11:02:29.238Z] c[OAuth] Initialized with baseURL: https://api.manus.im
+[2026-04-30T11:02:29.474Z] Server running on http://localhost:3000/
+[2026-04-30T11:02:35.325Z] 7:02:35 AM [tsx] change in ./server/db.ts Restarting...
+[2026-04-30T11:02:36.894Z] c[OAuth] Initialized with baseURL: https://api.manus.im
+[2026-04-30T11:02:37.193Z] Server running on http://localhost:3000/
+[2026-04-30T11:02:48.228Z] 7:02:48 AM [tsx] change in ./server/routers.ts Restarting...
+[2026-04-30T11:02:49.679Z] c[OAuth] Initialized with baseURL: https://api.manus.im
+[2026-04-30T11:02:49.913Z] Server running on http://localhost:3000/
+[2026-04-30T11:05:47.029Z] [baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+[2026-04-30T11:05:49.508Z] 7:05:49 AM [vite] (client) ✨ new dependencies optimized: @radix-ui/react-checkbox, @radix-ui/react-select
+[2026-04-30T11:05:49.508Z] 7:05:49 AM [vite] (client) ✨ optimized dependencies changed. reloading
+[2026-04-30T11:05:54.945Z] [Auth] Missing session cookie
+[2026-04-30T11:06:41.043Z] [Auth] Missing session cookie
+[2026-04-30T11:06:42.594Z] 7:06:42 AM [vite] (client) hmr update /src/App.tsx, /src/index.css
+[2026-04-30T11:06:47.433Z] 7:06:47 AM [vite] (client) hmr update /src/pages/Dashboard.tsx, /src/index.css
+[2026-04-30T11:12:50.903Z] Dev server process group stopped
+[2026-04-30T11:12:50.906Z] ELIFECYCLE  Command failed.
+[2026-04-30T11:12:50.931Z] Dev server exited with code -15
+[2026-04-30T11:12:53.942Z] Starting dev server with command: pnpm run dev
+[2026-04-30T11:12:54.673Z] 
+[2026-04-30T11:12:54.674Z] > leben-in-deutschland@1.0.0 dev /home/ubuntu/leben-in-deutschland
+[2026-04-30T11:12:54.674Z] > NODE_ENV=development tsx watch server/_core/index.ts
+[2026-04-30T11:12:54.674Z] 
+[2026-04-30T11:12:56.360Z] [OAuth] Initialized with baseURL: https://api.manus.im
+[2026-04-30T11:12:56.617Z] Server running on http://localhost:3000/
+[2026-04-30T11:13:01.428Z] [baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+[2026-04-30T15:33:25.123Z] 11:33:25 AM [vite] (client) hmr update /src/pages/Dashboard.tsx, /src/index.css
+[2026-04-30T15:33:25.207Z] 11:33:25 AM [vite] Internal server error: /home/ubuntu/leben-in-deutschland/client/src/pages/Dashboard.tsx: Identifier 'useAuth' has already been declared. (6:9)
+[2026-04-30T15:33:25.208Z] 
+[2026-04-30T15:33:25.208Z] 4 | import { useLocation } from "wouter";
+[2026-04-30T15:33:25.208Z] 5 | import { trpc } from "@/lib/trpc";
+[2026-04-30T15:33:25.208Z] > 6 | import { useAuth } from "@/_core/hooks/useAuth";
+[2026-04-30T15:33:25.209Z] |          ^
+[2026-04-30T15:33:25.209Z] 7 | import { Loader2, LogOut, BookOpen, DollarSign, Heart, FileText, GraduationCap, Landmark, CheckCircle2, Clock } from "lucide-react";
+[2026-04-30T15:33:25.209Z] 8 |
+[2026-04-30T15:33:25.209Z] 9 | const modules = [
+[2026-04-30T15:33:25.210Z] Plugin: vite:react-babel
+[2026-04-30T15:33:25.210Z] File: /home/ubuntu/leben-in-deutschland/client/src/pages/Dashboard.tsx:6:9
+[2026-04-30T15:33:25.210Z] 4  |  import { useLocation } from "wouter";
+[2026-04-30T15:33:25.211Z] 5  |  import { trpc } from "@/lib/trpc";
+[2026-04-30T15:33:25.211Z] 6  |  import { useAuth } from "@/_core/hooks/useAuth";
+[2026-04-30T15:33:25.211Z] |           ^
+[2026-04-30T15:33:25.211Z] 7  |  import { Loader2, LogOut, BookOpen, DollarSign, Heart, FileText, GraduationCap, Landmark, CheckCircle2, Clock } from ...
+[2026-04-30T15:33:25.212Z] 8  |
+[2026-04-30T15:33:25.212Z] at toParseError (/home/ubuntu/leben-in-deutschland/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parse-error.ts:95:45)
+[2026-04-30T15:33:25.212Z] at raise (/home/ubuntu/leben-in-deutschland/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/tokenizer/index.ts:1503:19)
+[2026-04-30T15:33:25.212Z] at declareName (/home/ubuntu/leben-in-deutschland/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/plugins/typescript/scope.ts:72:21)
+[2026-04-30T15:33:25.213Z] at declareNameFromIdentifier (/home/ubuntu/leben-in-deutschland/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/lval.ts:818:16)
+[2026-04-30T15:33:25.214Z] at checkIdentifier (/home/ubuntu/leben-in-deutschland/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/lval.ts:813:12)
+[2026-04-30T15:33:25.216Z] at checkLVal (/home/ubuntu/leben-in-deutschland/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/lval.ts:713:12)
+[2026-04-30T15:33:25.217Z] at finishImportSpecifier (/home/ubuntu/leben-in-deutschland/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/statement.ts:3223:10)
+[2026-04-30T15:33:25.217Z] at parseImportSpecifier (/home/ubuntu/leben-in-deutschland/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/statement.ts:3480:17)
+[2026-04-30T15:33:25.218Z] at parseImportSpecifier (/home/ubuntu/leben-in-deutschland/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/plugins/typescript/index.ts:4359:20)
+[2026-04-30T15:33:25.218Z] at parseNamedImportSpecifiers (/home/ubuntu/leben-in-deutschland/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/statement.ts:3441:36)
+[2026-04-30T15:33:25.218Z] at parseImportSpecifiersAndAfter (/home/ubuntu/leben-in-deutschland/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/statement.ts:3173:37)
+[2026-04-30T15:33:25.219Z] at parseImport (/home/ubuntu/leben-in-deutschland/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/statement.ts:3142:17)
+[2026-04-30T15:33:25.219Z] at parseImport (/home/ubuntu/leben-in-deutschland/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/plugins/typescript/index.ts:3011:28)
+[2026-04-30T15:33:25.220Z] at parseStatementContent (/home/ubuntu/leben-in-deutschland/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/statement.ts:642:25)
+[2026-04-30T15:33:25.220Z] at parseStatementContent (/home/ubuntu/leben-in-deutschland/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/plugins/typescript/index.ts:3185:20)
+[2026-04-30T15:33:25.220Z] at parseStatementLike (/home/ubuntu/leben-in-deutschland/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/statement.ts:477:17)
+[2026-04-30T15:33:25.221Z] at parseModuleItem (/home/ubuntu/leben-in-deutschland/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/statement.ts:414:17)
+[2026-04-30T15:33:25.221Z] at parseBlockOrModuleBlockBody (/home/ubuntu/leben-in-deutschland/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/statement.ts:1438:16)
+[2026-04-30T15:33:25.221Z] at parseBlockBody (/home/ubuntu/leben-in-deutschland/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/statement.ts:1412:10)
+[2026-04-30T15:33:25.222Z] at parseProgram (/home/ubuntu/leben-in-deutschland/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/statement.ts:229:10)
+[2026-04-30T15:33:25.222Z] at parseTopLevel (/home/ubuntu/leben-in-deutschland/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/statement.ts:203:25)
+[2026-04-30T15:33:25.222Z] at parse (/home/ubuntu/leben-in-deutschland/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/index.ts:93:10)
+[2026-04-30T15:33:25.223Z] at parse (/home/ubuntu/leben-in-deutschland/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/plugins/typescript/index.ts:4309:20)
+[2026-04-30T15:33:25.223Z] at parse (/home/ubuntu/leben-in-deutschland/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/index.ts:92:38)
+[2026-04-30T15:33:25.223Z] at parser (/home/ubuntu/leben-in-deutschland/node_modules/.pnpm/@babel+core@7.28.4/node_modules/@babel/core/src/parser/index.ts:28:19)
+[2026-04-30T15:33:25.224Z] at parser.next (<anonymous>)
+[2026-04-30T15:33:25.224Z] at normalizeFile (/home/ubuntu/leben-in-deutschland/node_modules/.pnpm/@babel+core@7.28.4/node_modules/@babel/core/src/transformation/normalize-file.ts:49:24)
+[2026-04-30T15:33:25.224Z] at normalizeFile.next (<anonymous>)
+[2026-04-30T15:33:25.231Z] at run (/home/ubuntu/leben-in-deutschland/node_modules/.pnpm/@babel+core@7.28.4/node_modules/@babel/core/src/transformation/index.ts:40:36)
+[2026-04-30T15:33:25.231Z] at run.next (<anonymous>)
+[2026-04-30T15:33:25.232Z] at transform (/home/ubuntu/leben-in-deutschland/node_modules/.pnpm/@babel+core@7.28.4/node_modules/@babel/core/src/transform.ts:29:20)
+[2026-04-30T15:33:25.232Z] at transform.next (<anonymous>)
+[2026-04-30T15:33:25.233Z] at step (/home/ubuntu/leben-in-deutschland/node_modules/.pnpm/gensync@1.0.0-beta.2/node_modules/gensync/index.js:261:32)
+[2026-04-30T15:33:25.233Z] at /home/ubuntu/leben-in-deutschland/node_modules/.pnpm/gensync@1.0.0-beta.2/node_modules/gensync/index.js:273:13
+[2026-04-30T15:33:25.233Z] at async.call.result.err.err (/home/ubuntu/leben-in-deutschland/node_modules/.pnpm/gensync@1.0.0-beta.2/node_modules/gensync/index.js:223:11)
+[2026-04-30T15:33:25.234Z] at /home/ubuntu/leben-in-deutschland/node_modules/.pnpm/gensync@1.0.0-beta.2/node_modules/gensync/index.js:189:28
+[2026-04-30T15:33:25.234Z] at <anonymous> (/home/ubuntu/leben-in-deutschland/node_modules/.pnpm/@babel+core@7.28.4/node_modules/@babel/core/src/gensync-utils/async.ts:90:7)
+[2026-04-30T15:33:25.235Z] at /home/ubuntu/leben-in-deutschland/node_modules/.pnpm/gensync@1.0.0-beta.2/node_modules/gensync/index.js:113:33
+[2026-04-30T15:33:25.236Z] at step (/home/ubuntu/leben-in-deutschland/node_modules/.pnpm/gensync@1.0.0-beta.2/node_modules/gensync/index.js:287:14)
+[2026-04-30T15:33:25.236Z] at /home/ubuntu/leben-in-deutschland/node_modules/.pnpm/gensync@1.0.0-beta.2/node_modules/gensync/index.js:273:13
+[2026-04-30T15:33:25.237Z] at async.call.result.err.err (/home/ubuntu/leben-in-deutschland/node_modules/.pnpm/gensync@1.0.0-beta.2/node_modules/gensync/index.js:223:11)
+[2026-04-30T15:33:25.263Z] 11:33:25 AM [vite] (client) Pre-transform error: /home/ubuntu/leben-in-deutschland/client/src/pages/Dashboard.tsx: Identifier 'useAuth' has already been declared. (6:9)
+[2026-04-30T15:33:25.264Z] 
+[2026-04-30T15:33:25.264Z] 4 | import { useLocation } from "wouter";
+[2026-04-30T15:33:25.264Z] 5 | import { trpc } from "@/lib/trpc";
+[2026-04-30T15:33:25.265Z] > 6 | import { useAuth } from "@/_core/hooks/useAuth";
+[2026-04-30T15:33:25.265Z] |          ^
+[2026-04-30T15:33:25.265Z] 7 | import { Loader2, LogOut, BookOpen, DollarSign, Heart, FileText, GraduationCap, Landmark, CheckCircle2, Clock } from "lucide-react";
+[2026-04-30T15:33:25.265Z] 8 |
+[2026-04-30T15:33:25.266Z] 9 | const modules = [
+[2026-04-30T15:33:25.266Z] Plugin: vite:react-babel
+[2026-04-30T15:33:25.266Z] File: /home/ubuntu/leben-in-deutschland/client/src/pages/Dashboard.tsx:6:9
+[2026-04-30T15:33:25.267Z] 4  |  import { useLocation } from "wouter";
+[2026-04-30T15:33:25.267Z] 5  |  import { trpc } from "@/lib/trpc";
+[2026-04-30T15:33:25.267Z] 6  |  import { useAuth } from "@/_core/hooks/useAuth";
+[2026-04-30T15:33:25.267Z] |           ^
+[2026-04-30T15:33:25.268Z] 7  |  import { Loader2, LogOut, BookOpen, DollarSign, Heart, FileText, GraduationCap, Landmark, CheckCircle2, Clock } from ...
+[2026-04-30T15:33:25.268Z] 8  |
+[2026-04-30T15:33:32.628Z] 11:33:32 AM [vite] (client) hmr update /src/pages/Dashboard.tsx, /src/index.css
+[2026-04-30T15:38:19.859Z] 11:38:19 AM [tsx] change in ./server/_core/storageProxy.ts Restarting...
+[2026-04-30T15:38:21.438Z] c[OAuth] Initialized with baseURL: https://api.manus.im
+[2026-04-30T15:38:21.679Z] Server running on http://localhost:3000/
+[2026-04-30T15:38:26.009Z] 11:38:26 AM [tsx] change in ./server/_core/storageProxy.ts Restarting...
+[2026-04-30T15:38:27.454Z] c[OAuth] Initialized with baseURL: https://api.manus.im
+[2026-04-30T15:38:27.687Z] Server running on http://localhost:3000/
+[2026-04-30T15:38:30.437Z] [baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+[2026-04-30T15:42:19.068Z] 11:42:19 AM [vite] (client) hmr update /src/index.css
+[2026-04-30T15:44:18.909Z] 11:44:18 AM [vite] (client) hmr update /src/pages/Home.tsx, /src/index.css
+[2026-04-30T15:45:16.640Z] 11:45:16 AM [vite] (client) hmr update /src/pages/Dashboard.tsx, /src/index.css
+[2026-04-30T15:45:22.995Z] 11:45:22 AM [vite] (client) hmr update /src/pages/Dashboard.tsx, /src/index.css
+[2026-04-30T15:45:32.368Z] 11:45:32 AM [vite] (client) hmr update /src/pages/Dashboard.tsx, /src/index.css
+[2026-04-30T15:45:44.147Z] 11:45:44 AM [vite] (client) hmr update /src/pages/Dashboard.tsx, /src/index.css
+[2026-04-30T15:46:00.778Z] 11:46:00 AM [vite] (client) hmr update /src/pages/Dashboard.tsx, /src/index.css
+[2026-04-30T15:47:04.467Z] 11:47:04 AM [vite] (client) hmr update /src/pages/Dashboard.tsx, /src/index.css
+[2026-04-30T15:47:13.671Z] 11:47:13 AM [vite] (client) hmr update /src/pages/Dashboard.tsx, /src/index.css
+[2026-04-30T15:47:28.224Z] 11:47:28 AM [vite] (client) hmr update /src/pages/Dashboard.tsx, /src/index.css
+[2026-04-30T15:55:21.986Z] 11:55:21 AM [vite] changed tsconfig file detected: /home/ubuntu/leben-in-deutschland/tsconfig.json - Clearing cache and forcing full-reload to ensure TypeScript is compiled with updated config values.
+[2026-04-30T15:55:21.987Z] 11:55:21 AM [vite] (client) page reload index.html
+[2026-04-30T15:55:21.988Z] 11:55:21 AM [vite] (client) page reload public/.gitkeep
+[2026-04-30T15:55:21.988Z] 11:55:21 AM [vite] (client) page reload public/__manus__/debug-collector.js
+[2026-04-30T15:55:21.988Z] 11:55:21 AM [vite] (client) page reload src/App.tsx
+[2026-04-30T15:55:21.988Z] 11:55:21 AM [vite] (client) page reload src/_core/hooks/useAuth.ts
+[2026-04-30T15:55:21.989Z] 11:55:21 AM [vite] (client) page reload src/components/AIChatBox.tsx
+[2026-04-30T15:55:21.989Z] 11:55:21 AM [vite] (client) page reload src/components/DashboardLayout.tsx
+[2026-04-30T15:55:21.989Z] 11:55:21 AM [vite] (client) page reload src/components/DashboardLayoutSkeleton.tsx
+[2026-04-30T15:55:21.990Z] 11:55:21 AM [vite] (client) page reload src/components/ErrorBoundary.tsx
+[2026-04-30T15:55:21.990Z] 11:55:21 AM [vite] (client) page reload src/components/ManusDialog.tsx
+[2026-04-30T15:55:21.990Z] 11:55:21 AM [vite] (client) page reload src/components/Map.tsx
+[2026-04-30T15:55:21.991Z] 11:55:21 AM [vite] (client) page reload src/components/ui/accordion.tsx
+[2026-04-30T15:55:21.991Z] 11:55:21 AM [vite] (client) page reload src/components/ui/alert-dialog.tsx
+[2026-04-30T15:55:21.991Z] 11:55:21 AM [vite] (client) page reload src/components/ui/alert.tsx
+[2026-04-30T15:55:21.992Z] 11:55:21 AM [vite] (client) page reload src/components/ui/aspect-ratio.tsx
+[2026-04-30T15:55:21.992Z] 11:55:21 AM [vite] (client) page reload src/components/ui/avatar.tsx
+[2026-04-30T15:55:21.992Z] 11:55:21 AM [vite] (client) page reload src/components/ui/badge.tsx
+[2026-04-30T15:55:21.992Z] 11:55:21 AM [vite] (client) page reload src/components/ui/breadcrumb.tsx
+[2026-04-30T15:55:21.993Z] 11:55:21 AM [vite] (client) page reload src/components/ui/button-group.tsx
+[2026-04-30T15:55:21.993Z] 11:55:21 AM [vite] (client) page reload src/components/ui/button.tsx
+[2026-04-30T15:55:21.993Z] 11:55:21 AM [vite] (client) page reload src/components/ui/calendar.tsx
+[2026-04-30T15:55:21.993Z] 11:55:21 AM [vite] (client) page reload src/components/ui/card.tsx
+[2026-04-30T15:55:21.994Z] 11:55:21 AM [vite] (client) page reload src/components/ui/carousel.tsx
+[2026-04-30T15:55:21.994Z] 11:55:21 AM [vite] (client) page reload src/components/ui/chart.tsx
+[2026-04-30T15:55:21.994Z] 11:55:21 AM [vite] (client) page reload src/components/ui/checkbox.tsx
+[2026-04-30T15:55:21.995Z] 11:55:21 AM [vite] (client) page reload src/components/ui/collapsible.tsx
+[2026-04-30T15:55:21.995Z] 11:55:21 AM [vite] (client) page reload src/components/ui/command.tsx
+[2026-04-30T15:55:21.995Z] 11:55:21 AM [vite] (client) page reload src/components/ui/context-menu.tsx
+[2026-04-30T15:55:21.995Z] 11:55:21 AM [vite] (client) page reload src/components/ui/dialog.tsx
+[2026-04-30T15:55:21.996Z] 11:55:21 AM [vite] (client) page reload src/components/ui/drawer.tsx
+[2026-04-30T15:55:21.996Z] 11:55:21 AM [vite] (client) page reload src/components/ui/dropdown-menu.tsx
+[2026-04-30T15:55:21.996Z] 11:55:21 AM [vite] (client) page reload src/components/ui/empty.tsx
+[2026-04-30T15:55:21.997Z] 11:55:21 AM [vite] (client) page reload src/components/ui/field.tsx
+[2026-04-30T15:55:21.997Z] 11:55:21 AM [vite] (client) page reload src/components/ui/form.tsx
+[2026-04-30T15:55:21.997Z] 11:55:21 AM [vite] (client) page reload src/components/ui/hover-card.tsx
+[2026-04-30T15:55:21.998Z] 11:55:21 AM [vite] (client) page reload src/components/ui/input-group.tsx
+[2026-04-30T15:55:21.998Z] 11:55:21 AM [vite] (client) page reload src/components/ui/input-otp.tsx
+[2026-04-30T15:55:21.998Z] 11:55:21 AM [vite] (client) page reload src/components/ui/input.tsx
+[2026-04-30T15:55:21.998Z] 11:55:21 AM [vite] (client) page reload src/components/ui/item.tsx
+[2026-04-30T15:55:21.999Z] 11:55:21 AM [vite] (client) page reload src/components/ui/kbd.tsx
+[2026-04-30T15:55:21.999Z] 11:55:21 AM [vite] (client) page reload src/components/ui/label.tsx
+[2026-04-30T15:55:21.999Z] 11:55:21 AM [vite] (client) page reload src/components/ui/menubar.tsx
+[2026-04-30T15:55:22.000Z] 11:55:21 AM [vite] (client) page reload src/components/ui/navigation-menu.tsx
+[2026-04-30T15:55:22.000Z] 11:55:21 AM [vite] (client) page reload src/components/ui/pagination.tsx
+[2026-04-30T15:55:22.000Z] 11:55:21 AM [vite] (client) page reload src/components/ui/popover.tsx
+[2026-04-30T15:55:22.000Z] 11:55:21 AM [vite] (client) page reload src/components/ui/progress.tsx
+[2026-04-30T15:55:22.001Z] 11:55:21 AM [vite] (client) page reload src/components/ui/radio-group.tsx
+[2026-04-30T15:55:22.001Z] 11:55:21 AM [vite] (client) page reload src/components/ui/resizable.tsx
+[2026-04-30T15:55:22.001Z] 11:55:21 AM [vite] (client) page reload src/components/ui/scroll-area.tsx
+[2026-04-30T15:55:22.001Z] 11:55:21 AM [vite] (client) page reload src/components/ui/select.tsx
+[2026-04-30T15:55:22.002Z] 11:55:21 AM [vite] (client) page reload src/components/ui/separator.tsx
+[2026-04-30T15:55:22.002Z] 11:55:21 AM [vite] (client) page reload src/components/ui/sheet.tsx
+[2026-04-30T15:55:22.002Z] 11:55:21 AM [vite] (client) page reload src/components/ui/sidebar.tsx
+[2026-04-30T15:55:22.003Z] 11:55:21 AM [vite] (client) page reload src/components/ui/skeleton.tsx
+[2026-04-30T15:55:22.003Z] 11:55:21 AM [vite] (client) page reload src/components/ui/slider.tsx
+[2026-04-30T15:55:22.003Z] 11:55:21 AM [vite] (client) page reload src/components/ui/sonner.tsx
+[2026-04-30T15:55:22.004Z] 11:55:21 AM [vite] (client) page reload src/components/ui/spinner.tsx
+[2026-04-30T15:55:22.004Z] 11:55:21 AM [vite] (client) page reload src/components/ui/switch.tsx
+[2026-04-30T15:55:22.004Z] 11:55:21 AM [vite] (client) page reload src/components/ui/table.tsx
+[2026-04-30T15:55:22.004Z] 11:55:21 AM [vite] (client) page reload src/components/ui/tabs.tsx
+[2026-04-30T15:55:22.005Z] 11:55:21 AM [vite] (client) page reload src/components/ui/textarea.tsx
+[2026-04-30T15:55:22.005Z] 11:55:21 AM [vite] (client) page reload src/components/ui/toggle-group.tsx
+[2026-04-30T15:55:22.005Z] 11:55:21 AM [vite] (client) page reload src/components/ui/toggle.tsx
+[2026-04-30T15:55:22.005Z] 11:55:21 AM [vite] (client) page reload src/components/ui/tooltip.tsx
+[2026-04-30T15:55:22.006Z] 11:55:21 AM [vite] (client) page reload src/const.ts
+[2026-04-30T15:55:22.006Z] 11:55:21 AM [vite] (client) page reload src/contexts/ThemeContext.tsx
+[2026-04-30T15:55:22.006Z] 11:55:21 AM [vite] (client) page reload src/hooks/useComposition.ts
+[2026-04-30T15:55:22.007Z] 11:55:21 AM [vite] (client) page reload src/hooks/useMobile.tsx
+[2026-04-30T15:55:22.007Z] 11:55:21 AM [vite] (client) page reload src/hooks/usePersistFn.ts
+[2026-04-30T15:55:22.007Z] 11:55:21 AM [vite] (client) hmr update /src/index.css
+[2026-04-30T15:55:22.007Z] 11:55:21 AM [vite] (client) page reload src/lib/trpc.ts
+[2026-04-30T15:55:22.008Z] 11:55:21 AM [vite] (client) page reload src/lib/utils.ts
+[2026-04-30T15:55:22.008Z] 11:55:21 AM [vite] (client) page reload src/main.tsx
+[2026-04-30T15:55:22.008Z] 11:55:21 AM [vite] (client) page reload src/pages/AnmeldungModule.tsx
+[2026-04-30T15:55:22.009Z] 11:55:21 AM [vite] (client) page reload src/pages/BankModule.tsx
+[2026-04-30T15:55:22.009Z] 11:55:21 AM [vite] (client) page reload src/pages/ComponentShowcase.tsx
+[2026-04-30T15:55:22.009Z] 11:55:21 AM [vite] (client) page reload src/pages/Dashboard.tsx
+[2026-04-30T15:55:22.010Z] 11:55:21 AM [vite] (client) page reload src/pages/HealthInsuranceModule.tsx
+[2026-04-30T15:55:22.010Z] 11:55:21 AM [vite] (client) page reload src/pages/Home.tsx
+[2026-04-30T15:55:22.010Z] 11:55:21 AM [vite] (client) page reload src/pages/IntegrationCoursesModule.tsx
+[2026-04-30T15:55:22.010Z] 11:55:21 AM [vite] (client) page reload src/pages/NotFound.tsx
+[2026-04-30T15:55:22.011Z] 11:55:21 AM [vite] (client) page reload src/pages/TaxIDModule.tsx
+[2026-04-30T15:55:22.011Z] 11:55:21 AM [vite] (client) page reload src/pages/VisaModule.tsx
+[2026-04-30T15:55:22.011Z] 11:55:21 AM [vite] (client) page reload /home/ubuntu/leben-in-deutschland/shared/const.ts
+[2026-04-30T15:55:22.087Z] 11:55:22 AM [tsx] unlink in ./vite.config.ts Restarting...
