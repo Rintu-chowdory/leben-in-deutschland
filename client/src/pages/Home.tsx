@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { getLoginUrl } from "@/const";
 import { useLocation } from "wouter";
-import { CheckCircle2, BookOpen, DollarSign, FileText, GraduationCap, Heart, Home as HomeIcon, Landmark, MapPin } from "lucide-react";
+import { CheckCircle2, BookOpen, DollarSign, FileText, GraduationCap, Heart, Home as HomeIcon, Landmark, MapPin, ArrowRight, Sparkles } from "lucide-react";
 
 export default function Home() {
   const { user, isAuthenticated } = useAuth();
@@ -12,60 +12,73 @@ export default function Home() {
   const features = [
     {
       icon: Landmark,
-      title: "Anmeldung Assistance",
-      description: "Step-by-step guidance for German registration with office locator and required documents checklist.",
+      title: "Anmeldung",
+      description: "Step-by-step guidance for German registration with office locator",
+      gradient: "gradient-card-1",
     },
     {
       icon: DollarSign,
-      title: "Bank Account Setup",
-      description: "Compare recommended banks with affiliate links and account opening bonuses for newcomers.",
+      title: "Bank Account",
+      description: "Compare recommended banks with affiliate links and bonuses",
+      gradient: "gradient-card-2",
     },
     {
       icon: Heart,
       title: "Health Insurance",
-      description: "Compare public (GKV) and private (PKV) insurance options with provider recommendations.",
+      description: "Compare GKV vs PKV options with provider recommendations",
+      gradient: "gradient-card-3",
     },
     {
       icon: FileText,
       title: "Visa & Permits",
-      description: "Comprehensive guidance on residence permits with step-by-step application instructions.",
+      description: "Comprehensive residence permit guidance and application steps",
+      gradient: "gradient-card-4",
     },
     {
       icon: GraduationCap,
       title: "Integration Courses",
-      description: "Find integration courses by city and type with direct links to BAMF resources.",
+      description: "Find courses by city and type with direct BAMF links",
+      gradient: "gradient-card-5",
     },
     {
       icon: BookOpen,
       title: "Tax ID Help",
-      description: "Complete walkthrough for Steueridentifikationsnummer application with downloadable checklist.",
+      description: "Steueridentifikationsnummer walkthrough with checklist",
+      gradient: "gradient-card-6",
     },
   ];
 
+  const benefits = [
+    "Trusted guidance from bureaucracy experts",
+    "Step-by-step walkthroughs for every process",
+    "Track your progress across all modules",
+    "Save resources and personal notes",
+    "Premium features for power users",
+  ];
+
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-white">
       {/* Navigation */}
-      <nav className="sticky top-0 z-50 bg-background/95 backdrop-blur border-b border-border">
-        <div className="container flex items-center justify-between h-16">
+      <nav className="fixed top-0 w-full bg-white/80 backdrop-blur-md z-50 border-b border-blue-100 shadow-sm">
+        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <div className="flex items-center gap-2">
-            <HomeIcon className="w-6 h-6 text-primary" />
-            <span className="text-xl font-bold text-foreground">Leben in Deutschland</span>
+            <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center animate-pulse">
+              <span className="text-white font-bold text-sm">LiD</span>
+            </div>
+            <span className="font-bold text-lg gradient-text">Leben in Deutschland</span>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex gap-3">
             {isAuthenticated ? (
-              <>
-                <span className="text-sm text-muted-foreground">{user?.name || user?.email}</span>
-                <Button onClick={() => navigate("/dashboard")} variant="default">
-                  Dashboard
-                </Button>
-              </>
+              <Button onClick={() => navigate("/dashboard")} className="bg-gradient-to-r from-blue-600 to-purple-600 hover:shadow-lg text-white">
+                Dashboard
+              </Button>
             ) : (
               <>
-                <Button variant="outline" onClick={() => window.location.href = getLoginUrl()}>
-                  Login
+                <Button variant="outline" onClick={() => (window.location.href = getLoginUrl())}>
+                  Sign In
                 </Button>
-                <Button variant="default" onClick={() => window.location.href = getLoginUrl()}>
-                  Sign Up
+                <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:shadow-lg text-white" onClick={() => (window.location.href = getLoginUrl())}>
+                  Get Started
                 </Button>
               </>
             )}
@@ -74,26 +87,36 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative overflow-hidden py-20 md:py-32">
-        <div className="container">
-          <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6 leading-tight">
+      <section className="pt-32 pb-20 px-4 relative overflow-hidden bg-gradient-to-br from-blue-50 via-white to-purple-50">
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-20 left-10 w-72 h-72 bg-blue-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
+          <div className="absolute top-40 right-10 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20" style={{ animation: "blob 7s infinite 2s" }}></div>
+          <div className="absolute -bottom-8 left-1/2 w-72 h-72 bg-amber-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20" style={{ animation: "blob 7s infinite 4s" }}></div>
+        </div>
+
+        <div className="container mx-auto relative z-10">
+          <div className="text-center mb-12 fade-in-up">
+            <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-700 px-4 py-2 rounded-full mb-6">
+              <Sparkles className="w-4 h-4" />
+              <span className="text-sm font-semibold">Welcome to your German journey</span>
+            </div>
+            <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-blue-600 via-purple-600 to-amber-500 bg-clip-text text-transparent">
               Navigate German Bureaucracy with Confidence
             </h1>
-            <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
+            <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
               Your all-in-one platform for every essential step. From registration to tax ID, we guide you through every bureaucratic process with clarity and expertise.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex gap-4 justify-center flex-wrap">
               {isAuthenticated ? (
-                <Button size="lg" onClick={() => navigate("/dashboard")}>
-                  Go to Dashboard
+                <Button size="lg" className="bg-gradient-to-r from-blue-600 to-purple-600 hover:shadow-lg text-lg px-8 text-white" onClick={() => navigate("/dashboard")}>
+                  Go to Dashboard <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
               ) : (
                 <>
-                  <Button size="lg" onClick={() => window.location.href = getLoginUrl()}>
-                    Get Started Free
+                  <Button size="lg" className="bg-gradient-to-r from-blue-600 to-purple-600 hover:shadow-lg text-lg px-8 text-white" onClick={() => (window.location.href = getLoginUrl())}>
+                    Get Started Free <ArrowRight className="ml-2 w-5 h-5" />
                   </Button>
-                  <Button size="lg" variant="outline" onClick={() => window.location.href = getLoginUrl()}>
+                  <Button size="lg" variant="outline" className="text-lg px-8 border-2 border-blue-300" onClick={() => (window.location.href = getLoginUrl())}>
                     Learn More
                   </Button>
                 </>
@@ -103,32 +126,29 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Features Grid */}
-      <section className="py-20 md:py-32 bg-card/50">
-        <div className="container">
+      {/* Features Section */}
+      <section className="py-20 px-4 bg-gradient-to-b from-white via-blue-50/30 to-white">
+        <div className="container mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Everything You Need
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Comprehensive modules covering all aspects of settling in Germany
-            </p>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">Everything You Need</h2>
+            <p className="text-xl text-gray-600">Comprehensive modules covering all aspects of settling in Germany</p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {features.map((feature, idx) => {
               const Icon = feature.icon;
               return (
-                <Card key={idx} className="p-6 hover:shadow-lg transition-shadow">
-                  <div className="mb-4">
-                    <Icon className="w-8 h-8 text-primary" />
+                <Card
+                  key={idx}
+                  className={`p-6 ${feature.gradient} hover-lift border-0 shadow-lg overflow-hidden relative group cursor-pointer transform transition-all duration-300`}
+                  style={{ animation: `fade-in-up 0.6s ease-out ${idx * 0.1}s backwards` }}
+                >
+                  <div className="absolute inset-0 bg-white/0 group-hover:bg-white/10 transition-all duration-300"></div>
+                  <div className="relative z-10">
+                    <Icon className="w-12 h-12 mb-4 text-white drop-shadow-lg" />
+                    <h3 className="text-2xl font-bold text-white mb-2">{feature.title}</h3>
+                    <p className="text-white/90 text-sm">{feature.description}</p>
                   </div>
-                  <h3 className="text-lg font-semibold text-foreground mb-2">
-                    {feature.title}
-                  </h3>
-                  <p className="text-muted-foreground">
-                    {feature.description}
-                  </p>
                 </Card>
               );
             })}
@@ -137,100 +157,91 @@ export default function Home() {
       </section>
 
       {/* Benefits Section */}
-      <section className="py-20 md:py-32">
-        <div className="container">
+      <section className="py-20 px-4 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-10 left-10 w-40 h-40 bg-white rounded-full mix-blend-multiply filter blur-3xl"></div>
+          <div className="absolute bottom-10 right-10 w-40 h-40 bg-white rounded-full mix-blend-multiply filter blur-3xl"></div>
+        </div>
+
+        <div className="container mx-auto relative z-10">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
-                Why Choose Leben in Deutschland?
-              </h2>
-              <ul className="space-y-4">
-                {[
-                  "Trusted guidance from German bureaucracy experts",
-                  "Step-by-step walkthroughs for every process",
-                  "Track your progress across all modules",
-                  "Save resources and personal notes",
-                  "Premium features for power users",
-                  "Affiliate partnerships with recommended providers",
-                ].map((benefit, idx) => (
-                  <li key={idx} className="flex items-start gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                    <span className="text-foreground">{benefit}</span>
-                  </li>
+              <h2 className="text-4xl font-bold text-white mb-8">Why Choose Leben in Deutschland?</h2>
+              <div className="space-y-4">
+                {benefits.map((benefit, idx) => (
+                  <div key={idx} className="flex items-start gap-4 fade-in-up" style={{ animationDelay: `${idx * 0.1}s` }}>
+                    <CheckCircle2 className="w-6 h-6 text-amber-300 flex-shrink-0 mt-1" />
+                    <p className="text-white text-lg">{benefit}</p>
+                  </div>
                 ))}
-              </ul>
+              </div>
             </div>
-            <div className="bg-gradient-to-br from-primary/10 to-accent/10 rounded-lg p-8 min-h-96 flex items-center justify-center">
-              <div className="text-center">
-                <MapPin className="w-16 h-16 text-primary mx-auto mb-4 opacity-50" />
-                <p className="text-muted-foreground">
-                  Your journey to successful integration starts here
-                </p>
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-to-br from-amber-300 to-orange-300 rounded-2xl transform rotate-6 opacity-20"></div>
+              <div className="relative bg-white rounded-2xl p-8 shadow-2xl">
+                <div className="space-y-6">
+                  {[
+                    { num: "1", title: "Sign Up", desc: "Create your account in seconds", color: "from-blue-500 to-purple-500" },
+                    { num: "2", title: "Explore Modules", desc: "Access all 6 comprehensive guides", color: "from-purple-500 to-pink-500" },
+                    { num: "3", title: "Track Progress", desc: "Monitor your journey to integration", color: "from-amber-500 to-orange-500" },
+                  ].map((step, idx) => (
+                    <div key={idx} className="flex items-center gap-4 p-4 bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg hover:shadow-md transition-all">
+                      <div className={`w-12 h-12 bg-gradient-to-br ${step.color} rounded-lg flex items-center justify-center flex-shrink-0`}>
+                        <span className="text-white font-bold">{step.num}</span>
+                      </div>
+                      <div>
+                        <p className="font-semibold text-gray-900">{step.title}</p>
+                        <p className="text-sm text-gray-600">{step.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Pricing Preview */}
-      <section className="py-20 md:py-32 bg-card/50">
-        <div className="container">
+      {/* Pricing Section */}
+      <section className="py-20 px-4 bg-gradient-to-b from-white to-blue-50">
+        <div className="container mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Simple, Transparent Pricing
-            </h2>
-            <p className="text-lg text-muted-foreground">
-              Start free, upgrade when you need premium features
-            </p>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">Simple, Transparent Pricing</h2>
+            <p className="text-xl text-gray-600">Start free, upgrade when you need premium features</p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8 max-w-2xl mx-auto">
-            <Card className="p-8">
-              <h3 className="text-2xl font-bold text-foreground mb-2">Free</h3>
-              <p className="text-muted-foreground mb-6">Perfect for getting started</p>
-              <div className="text-3xl font-bold text-foreground mb-6">€0<span className="text-lg text-muted-foreground">/month</span></div>
+          <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+            <Card className="p-8 border-2 border-gray-200 hover:shadow-xl transition-all">
+              <h3 className="text-2xl font-bold text-gray-900 mb-2">Free</h3>
+              <p className="text-gray-600 mb-6">Perfect for getting started</p>
+              <div className="text-4xl font-bold text-gray-900 mb-6">€0<span className="text-lg text-gray-600">/month</span></div>
               <ul className="space-y-3 mb-8">
-                <li className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-primary" />
-                  <span className="text-foreground">All core modules</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-primary" />
-                  <span className="text-foreground">Progress tracking</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-primary" />
-                  <span className="text-foreground">Save resources</span>
-                </li>
+                {["All core modules", "Progress tracking", "Save resources"].map((item, idx) => (
+                  <li key={idx} className="flex items-center gap-2">
+                    <CheckCircle2 className="w-5 h-5 text-blue-600" />
+                    <span className="text-gray-700">{item}</span>
+                  </li>
+                ))}
               </ul>
-              <Button variant="outline" className="w-full" onClick={() => window.location.href = getLoginUrl()}>
+              <Button variant="outline" className="w-full border-2" onClick={() => window.location.href = getLoginUrl()}>
                 Get Started
               </Button>
             </Card>
 
-            <Card className="p-8 border-primary border-2">
-              <h3 className="text-2xl font-bold text-foreground mb-2">Premium</h3>
-              <p className="text-primary font-semibold mb-6">Most popular</p>
-              <div className="text-3xl font-bold text-foreground mb-6">€9.99<span className="text-lg text-muted-foreground">/month</span></div>
+            <Card className="p-8 border-2 bg-gradient-to-br from-blue-50 to-purple-50 border-blue-400 hover:shadow-xl transition-all transform hover:scale-105">
+              <div className="inline-block bg-gradient-to-r from-blue-600 to-purple-600 text-white px-3 py-1 rounded-full text-sm font-semibold mb-4">Most Popular</div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-2">Premium</h3>
+              <p className="text-blue-600 font-semibold mb-6">Unlock all features</p>
+              <div className="text-4xl font-bold text-gray-900 mb-6">€9.99<span className="text-lg text-gray-600">/month</span></div>
               <ul className="space-y-3 mb-8">
-                <li className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-primary" />
-                  <span className="text-foreground">Everything in Free</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-primary" />
-                  <span className="text-foreground">Priority support</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-primary" />
-                  <span className="text-foreground">Advanced analytics</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-primary" />
-                  <span className="text-foreground">Exclusive resources</span>
-                </li>
+                {["Everything in Free", "Priority support", "Advanced analytics", "Exclusive resources"].map((item, idx) => (
+                  <li key={idx} className="flex items-center gap-2">
+                    <CheckCircle2 className="w-5 h-5 text-blue-600" />
+                    <span className="text-gray-700">{item}</span>
+                  </li>
+                ))}
               </ul>
-              <Button className="w-full" onClick={() => window.location.href = getLoginUrl()}>
+              <Button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:shadow-lg text-white" onClick={() => window.location.href = getLoginUrl()}>
                 Upgrade Now
               </Button>
             </Card>
@@ -239,66 +250,57 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 md:py-32 bg-primary text-primary-foreground">
-        <div className="container text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Ready to Simplify Your German Journey?
-          </h2>
-          <p className="text-lg mb-8 opacity-90 max-w-2xl mx-auto">
-            Join thousands of newcomers who are navigating German bureaucracy with confidence
-          </p>
-          <Button 
-            size="lg" 
-            variant="secondary"
-            onClick={() => window.location.href = getLoginUrl()}
-          >
-            Start Your Free Account Today
+      <section className="py-20 px-4 bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-10 left-10 w-40 h-40 bg-blue-400 rounded-full mix-blend-multiply filter blur-3xl"></div>
+          <div className="absolute bottom-10 right-10 w-40 h-40 bg-purple-400 rounded-full mix-blend-multiply filter blur-3xl"></div>
+        </div>
+
+        <div className="container mx-auto relative z-10 text-center">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Ready to Simplify Your German Journey?</h2>
+          <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">Join thousands of newcomers who are navigating German bureaucracy with confidence</p>
+          <Button size="lg" className="bg-gradient-to-r from-amber-400 to-orange-500 hover:shadow-xl text-lg px-8 text-gray-900 font-bold" onClick={() => (window.location.href = getLoginUrl())}>
+            Start Your Free Account Today <ArrowRight className="ml-2 w-5 h-5" />
           </Button>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-card border-t border-border py-12">
-        <div className="container">
+      <footer className="bg-gray-900 text-gray-300 py-12 px-4">
+        <div className="container mx-auto">
           <div className="grid md:grid-cols-4 gap-8 mb-8">
-            <div>
-              <h4 className="font-semibold text-foreground mb-4">Product</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><a href="#" className="hover:text-foreground transition">Features</a></li>
-                <li><a href="#" className="hover:text-foreground transition">Pricing</a></li>
-                <li><a href="#" className="hover:text-foreground transition">Dashboard</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold text-foreground mb-4">Resources</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><a href="#" className="hover:text-foreground transition">Blog</a></li>
-                <li><a href="#" className="hover:text-foreground transition">Guides</a></li>
-                <li><a href="#" className="hover:text-foreground transition">FAQ</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold text-foreground mb-4">Company</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><a href="#" className="hover:text-foreground transition">About</a></li>
-                <li><a href="#" className="hover:text-foreground transition">Contact</a></li>
-                <li><a href="#" className="hover:text-foreground transition">Careers</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold text-foreground mb-4">Legal</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><a href="#" className="hover:text-foreground transition">Privacy</a></li>
-                <li><a href="#" className="hover:text-foreground transition">Terms</a></li>
-                <li><a href="#" className="hover:text-foreground transition">Impressum</a></li>
-              </ul>
-            </div>
+            {[
+              { title: "Product", links: ["Features", "Pricing", "Dashboard"] },
+              { title: "Resources", links: ["Blog", "Guides", "FAQ"] },
+              { title: "Company", links: ["About", "Contact", "Careers"] },
+              { title: "Legal", links: ["Privacy", "Terms", "Impressum"] },
+            ].map((col, idx) => (
+              <div key={idx}>
+                <h3 className="font-bold text-white mb-4">{col.title}</h3>
+                <ul className="space-y-2">
+                  {col.links.map((link, lidx) => (
+                    <li key={lidx}><a href="#" className="hover:text-white transition">{link}</a></li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
-          <div className="border-t border-border pt-8 text-center text-sm text-muted-foreground">
+          <div className="border-t border-gray-800 pt-8 text-center">
             <p>&copy; 2026 Leben in Deutschland. All rights reserved.</p>
           </div>
         </div>
       </footer>
+
+      <style>{`
+        @keyframes blob {
+          0%, 100% { transform: translate(0, 0) scale(1); }
+          33% { transform: translate(30px, -50px) scale(1.1); }
+          66% { transform: translate(-20px, 20px) scale(0.9); }
+        }
+        .animate-blob {
+          animation: blob 7s infinite;
+        }
+      `}</style>
     </div>
   );
 }

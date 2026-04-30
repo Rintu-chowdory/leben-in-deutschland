@@ -43,44 +43,43 @@
 }
 
 :root {
-  /* Elegant premium palette: Deep blue-gray primary with warm accents */
-  --primary: oklch(0.45 0.15 260); /* Deep sophisticated blue */
+  /* Vibrant modern palette with rich colors */
+  --primary: oklch(0.50 0.20 260);
   --primary-foreground: oklch(0.98 0.001 0);
-  --sidebar-primary: oklch(0.45 0.15 260);
+  --sidebar-primary: oklch(0.50 0.20 260);
   --sidebar-primary-foreground: oklch(0.98 0.001 0);
-  --chart-1: oklch(0.65 0.18 260);
-  --chart-2: oklch(0.55 0.16 260);
-  --chart-3: oklch(0.45 0.15 260);
-  --chart-4: oklch(0.35 0.12 260);
-  --chart-5: oklch(0.25 0.08 260);
+  --chart-1: oklch(0.70 0.22 260);
+  --chart-2: oklch(0.65 0.20 45);
+  --chart-3: oklch(0.60 0.18 150);
+  --chart-4: oklch(0.55 0.16 300);
+  --chart-5: oklch(0.50 0.15 30);
   --radius: 0.75rem;
-  --background: oklch(0.99 0 0);
+  --background: #ffffff;
   --foreground: oklch(0.2 0.02 260);
   --card: oklch(0.98 0.001 0);
   --card-foreground: oklch(0.2 0.02 260);
   --popover: oklch(0.98 0.001 0);
   --popover-foreground: oklch(0.2 0.02 260);
-  --secondary: oklch(0.88 0.08 35); /* Warm amber accent */
+  --secondary: oklch(0.75 0.18 45);
   --secondary-foreground: oklch(0.2 0.02 260);
   --muted: oklch(0.93 0.01 260);
   --muted-foreground: oklch(0.5 0.02 260);
-  --accent: oklch(0.65 0.18 260); /* Lighter blue for accents */
+  --accent: oklch(0.70 0.22 260);
   --accent-foreground: oklch(0.98 0.001 0);
-  --destructive: oklch(0.577 0.245 27.325);
+  --destructive: oklch(0.65 0.25 30);
   --destructive-foreground: oklch(0.985 0 0);
   --border: oklch(0.94 0.005 260);
   --input: oklch(0.96 0.003 260);
-  --ring: oklch(0.65 0.18 260);
+  --ring: oklch(0.70 0.22 260);
   --sidebar: oklch(0.98 0.001 0);
   --sidebar-foreground: oklch(0.2 0.02 260);
   --sidebar-accent: oklch(0.93 0.01 260);
-  --sidebar-accent-foreground: oklch(0.45 0.15 260);
+  --sidebar-accent-foreground: oklch(0.50 0.20 260);
   --sidebar-border: oklch(0.94 0.005 260);
-  --sidebar-ring: oklch(0.65 0.18 260);
+  --sidebar-ring: oklch(0.70 0.22 260);
 }
 
 .dark {
-  /* Dark mode: Sophisticated dark blue-gray with warm accents */
   --primary: oklch(0.65 0.18 260);
   --primary-foreground: oklch(0.98 0.001 0);
   --sidebar-primary: oklch(0.65 0.18 260);
@@ -91,7 +90,7 @@
   --card-foreground: oklch(0.92 0.01 260);
   --popover: oklch(0.18 0.01 260);
   --popover-foreground: oklch(0.92 0.01 260);
-  --secondary: oklch(0.75 0.12 35); /* Warm amber accent */
+  --secondary: oklch(0.75 0.12 35);
   --secondary-foreground: oklch(0.12 0.01 260);
   --muted: oklch(0.25 0.01 260);
   --muted-foreground: oklch(0.7 0.01 260);
@@ -115,6 +114,48 @@
   --sidebar-ring: oklch(0.65 0.18 260);
 }
 
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.3); }
+  50% { box-shadow: 0 0 40px rgba(59, 130, 246, 0.6); }
+}
+
+@keyframes slide-in-left {
+  from { opacity: 0; transform: translateX(-30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slide-in-right {
+  from { opacity: 0; transform: translateX(30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
+}
+
+@keyframes bounce-in {
+  0% { opacity: 0; transform: scale(0.9); }
+  50% { opacity: 1; }
+  100% { transform: scale(1); }
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -136,24 +177,11 @@
 }
 
 @layer components {
-  /**
-   * Custom container utility that centers content and adds responsive padding.
-   *
-   * This overrides Tailwind's default container behavior to:
-   * - Auto-center content (mx-auto)
-   * - Add responsive horizontal padding
-   * - Set max-width for large screens
-   *
-   * Usage: <div className="container">...</div>
-   *
-   * For custom widths, use max-w-* utilities directly:
-   * <div className="max-w-6xl mx-auto px-4">...</div>
-   */
   .container {
     width: 100%;
     margin-left: auto;
     margin-right: auto;
-    padding-left: 1rem; /* 16px - mobile padding */
+    padding-left: 1rem;
     padding-right: 1rem;
   }
 
@@ -162,18 +190,126 @@
     min-width: 0;
   }
 
+  /* Animated gradient background */
+  .gradient-bg {
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradient-shift 15s ease infinite;
+  }
+
+  /* Floating animation */
+  .float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  /* Pulse glow effect */
+  .pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  /* Slide in animations */
+  .slide-in-left {
+    animation: slide-in-left 0.6s ease-out;
+  }
+
+  .slide-in-right {
+    animation: slide-in-right 0.6s ease-out;
+  }
+
+  .fade-in-up {
+    animation: fade-in-up 0.6s ease-out;
+  }
+
+  .bounce-in {
+    animation: bounce-in 0.6s ease-out;
+  }
+
+  /* Shimmer effect */
+  .shimmer {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 1000px 100%;
+    animation: shimmer 2s infinite;
+  }
+
+  /* Colorful gradient cards */
+  .gradient-card-1 {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+  }
+
+  .gradient-card-2 {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+  }
+
+  .gradient-card-3 {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    color: white;
+  }
+
+  .gradient-card-4 {
+    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+    color: white;
+  }
+
+  .gradient-card-5 {
+    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+    color: white;
+  }
+
+  .gradient-card-6 {
+    background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);
+    color: white;
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Colorful border */
+  .border-gradient {
+    border-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%) 1;
+  }
+
+  /* Hover effects */
+  .hover-lift {
+    transition: all 0.3s ease;
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Background patterns */
+  .dots-pattern {
+    background-image: radial-gradient(circle, #e0e7ff 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+
+  .grid-pattern {
+    background-image: 
+      linear-gradient(0deg, transparent 24%, rgba(102, 126, 234, 0.05) 25%, rgba(102, 126, 234, 0.05) 26%, transparent 27%, transparent 74%, rgba(102, 126, 234, 0.05) 75%, rgba(102, 126, 234, 0.05) 76%, transparent 77%, transparent),
+      linear-gradient(90deg, transparent 24%, rgba(102, 126, 234, 0.05) 25%, rgba(102, 126, 234, 0.05) 26%, transparent 27%, transparent 74%, rgba(102, 126, 234, 0.05) 75%, rgba(102, 126, 234, 0.05) 76%, transparent 77%, transparent);
+    background-size: 50px 50px;
+  }
+
   @media (min-width: 640px) {
     .container {
-      padding-left: 1.5rem; /* 24px - tablet padding */
+      padding-left: 1.5rem;
       padding-right: 1.5rem;
     }
   }
 
   @media (min-width: 1024px) {
     .container {
-      padding-left: 2rem; /* 32px - desktop padding */
+      padding-left: 2rem;
       padding-right: 2rem;
-      max-width: 1280px; /* Standard content width */
+      max-width: 1280px;
     }
   }
 }

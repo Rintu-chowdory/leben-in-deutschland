@@ -42,24 +42,24 @@ export default function Dashboard() {
   const totalCompletion = allProgress && allProgress.length > 0 ? Math.round(allProgress.reduce((sum, p) => sum + p.completionPercentage, 0) / allProgress.length) : 0;
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
       {/* Header */}
-      <header className="bg-card border-b border-border sticky top-0 z-40">
+      <header className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white border-b border-blue-200 sticky top-0 z-40 shadow-lg">
         <div className="container flex items-center justify-between h-16">
           <div>
-            <h1 className="text-2xl font-bold text-foreground">Dashboard</h1>
-            <p className="text-sm text-muted-foreground">Welcome back, {user?.name || user?.email}</p>
+            <h1 className="text-3xl font-bold text-white">Dashboard</h1>
+            <p className="text-sm text-white/80">Welcome back, {user?.name || user?.email}</p>
           </div>
           <div className="flex items-center gap-4">
-            <div className="text-right">
-              <p className="text-sm font-semibold text-foreground">
+            <div className="text-right bg-white/10 backdrop-blur-sm px-4 py-2 rounded-lg">
+              <p className="text-sm font-semibold text-white">
                 {subscription?.tier === 'premium' ? '✨ Premium' : 'Free Plan'}
               </p>
-              <p className="text-xs text-muted-foreground">
+              <p className="text-xs text-white/70">
                 {subscription?.tier === 'free' && 'Upgrade for more features'}
               </p>
             </div>
-            <Button variant="outline" size="sm" onClick={handleLogout}>
+            <Button variant="secondary" size="sm" onClick={handleLogout} className="bg-white text-purple-600 hover:bg-gray-100">
               <LogOut className="w-4 h-4 mr-2" />
               Logout
             </Button>
@@ -69,13 +69,13 @@ export default function Dashboard() {
 
       <main className="container py-8">
         {/* Overall Progress */}
-        <Card className="p-8 mb-8">
-          <h2 className="text-2xl font-bold text-foreground mb-4">Your Progress</h2>
+        <Card className="p-8 mb-8 bg-gradient-to-br from-white to-blue-50 border-2 border-blue-200 shadow-lg hover:shadow-xl transition-all">
+          <h2 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-6">Your Progress</h2>
           <div className="flex items-center gap-8">
             <div className="flex-1">
-              <div className="h-4 bg-muted rounded-full overflow-hidden">
+              <div className="h-5 bg-gray-200 rounded-full overflow-hidden shadow-md">
                 <div 
-                  className="h-full bg-gradient-to-r from-primary to-accent transition-all duration-500"
+                  className="h-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 transition-all duration-500 shadow-lg"
                   style={{ width: `${totalCompletion}%` }}
                 />
               </div>
@@ -92,7 +92,7 @@ export default function Dashboard() {
 
         {/* Modules Grid */}
         <div className="mb-8">
-          <h2 className="text-2xl font-bold text-foreground mb-6">Modules</h2>
+          <h2 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-8">Your Modules</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {modules.map((module) => {
               const Icon = module.icon;
@@ -108,32 +108,35 @@ export default function Dashboard() {
                 'tax': '/module/tax',
               };
 
+              const gradients = ['gradient-card-1', 'gradient-card-2', 'gradient-card-3', 'gradient-card-4', 'gradient-card-5', 'gradient-card-6'];
+              const gradientClass = gradients[modules.indexOf(module) % gradients.length];
+              
               return (
                 <Card 
                   key={module.id} 
-                  className="p-6 hover:shadow-lg transition-all cursor-pointer"
+                  className={`p-6 ${completion === 100 ? gradientClass : 'bg-white border-2 border-gray-200'} hover:shadow-xl transition-all cursor-pointer transform hover:scale-105 hover-lift`}
                   onClick={() => navigate(moduleRoutes[module.id] || '/dashboard')}
                 >
                   <div className="flex items-start justify-between mb-4">
-                    <Icon className="w-8 h-8 text-primary" />
+                    <Icon className={`w-8 h-8 ${completion === 100 ? 'text-white drop-shadow-lg' : 'text-blue-600'}`} />
                     {completion === 100 && (
-                      <CheckCircle2 className="w-5 h-5 text-green-500" />
+                      <CheckCircle2 className="w-5 h-5 text-white drop-shadow-lg" />
                     )}
                   </div>
-                  <h3 className="text-lg font-semibold text-foreground mb-1">
+                  <h3 className={`text-lg font-semibold mb-1 ${completion === 100 ? 'text-white' : 'text-gray-900'}`}>
                     {module.name}
                   </h3>
-                  <p className="text-sm text-muted-foreground mb-4">
+                  <p className={`text-sm mb-4 ${completion === 100 ? 'text-white/90' : 'text-gray-600'}`}>
                     {module.description}
                   </p>
                   <div className="space-y-2">
-                    <div className="h-2 bg-muted rounded-full overflow-hidden">
+                    <div className={`h-3 rounded-full overflow-hidden ${completion === 100 ? 'bg-white/30' : 'bg-gray-200'}`}>
                       <div 
-                        className="h-full bg-primary transition-all duration-300"
+                        className={`h-full transition-all duration-300 ${completion === 100 ? 'bg-white shadow-lg' : 'bg-gradient-to-r from-blue-500 to-purple-500'}`}
                         style={{ width: `${completion}%` }}
                       />
                     </div>
-                    <p className="text-xs text-muted-foreground">
+                    <p className={`text-xs font-semibold ${completion === 100 ? 'text-white/80' : 'text-gray-600'}`}>
                       {completion}% complete
                     </p>
                   </div>
