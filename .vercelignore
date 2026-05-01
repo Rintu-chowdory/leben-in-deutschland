@@ -1,0 +1,14 @@
+.git
+.gitignore
+README.md
+node_modules
+.next
+.env.local
+.env.*.local
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.DS_Store
+dist
+.manus-logs
+.webdev
