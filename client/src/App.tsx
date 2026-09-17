@@ -1,7 +1,7 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
-import { Route, Switch } from "wouter";
+import { Route, Router as WouterRouter, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
@@ -15,8 +15,7 @@ import TaxIDModule from "./pages/TaxIDModule";
 import Einbuergerungstest from "./pages/tools/Einbuergerungstest";
 import Fristenrechner from "./pages/tools/Fristenrechner";
 
-function Router() {
-  // make sure to consider if you need authentication for certain routes
+function Routes() {
   return (
     <Switch>
       <Route path={"/"} component={Home} />
@@ -30,18 +29,16 @@ function Router() {
       <Route path={"/werkzeuge/einbuergerungstest"} component={Einbuergerungstest} />
       <Route path={"/werkzeuge/fristenrechner"} component={Fristenrechner} />
       <Route path={"/404"} component={NotFound} />
-      {/* Final fallback route */}
+      {/* Fallback-Route */}
       <Route component={NotFound} />
     </Switch>
   );
 }
 
-// NOTE: About Theme
-// - First choose a default theme according to your design style (dark or light bg), than change color palette in index.css
-//   to keep consistent foreground/background color across components
-// - If you want to make theme switchable, pass `switchable` ThemeProvider and use `useTheme` hook
-
 function App() {
+  // Basispfad für das GitHub-Pages-Deployment (Vite BASE_URL), damit die wouter-Routen passen
+  const base = (import.meta.env.BASE_URL || '/').replace(/\/+$/, '');
+
   return (
     <ErrorBoundary>
       <ThemeProvider
@@ -50,7 +47,9 @@ function App() {
       >
         <TooltipProvider>
           <Toaster />
-          <Router />
+          <WouterRouter base={base || undefined}>
+            <Routes />
+          </WouterRouter>
         </TooltipProvider>
       </ThemeProvider>
     </ErrorBoundary>
