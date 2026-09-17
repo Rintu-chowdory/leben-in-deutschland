@@ -1,285 +1,94 @@
-import { useAuth } from "@/_core/hooks/useAuth";
-import { Button } from "@/components/ui/button";
+import ModuleShell from "@/components/ModuleShell";
 import { Card } from "@/components/ui/card";
-import { useLocation } from "wouter";
-import { useState } from "react";
-import { FileText, CheckCircle2, AlertCircle, Download } from "lucide-react";
-
-const checklistItems = [
-  { id: 'passport', label: 'Valid passport or ID card' },
-  { id: 'residence', label: 'Proof of German residence (Anmeldung certificate)' },
-  { id: 'employment', label: 'Employment contract or proof of income' },
-  { id: 'form', label: 'Completed application form (if required)' },
-  { id: 'contact', label: 'Valid contact information (phone, email)' },
-];
+import { ExternalLink, Phone, FileText } from "lucide-react";
 
 export default function TaxIDModule() {
-  const { isAuthenticated } = useAuth();
-  const [, navigate] = useLocation();
-  const [checkedItems, setCheckedItems] = useState<Set<string>>(new Set());
-
-  if (!isAuthenticated) {
-    navigate('/');
-    return null;
-  }
-
-  const handleCheck = (id: string) => {
-    const newChecked = new Set(checkedItems);
-    if (newChecked.has(id)) {
-      newChecked.delete(id);
-    } else {
-      newChecked.add(id);
-    }
-    setCheckedItems(newChecked);
-  };
-
-  const downloadChecklist = () => {
-    const checklistText = `
-STEUERIDENTIFIKATIONSNUMMER (TAX ID) CHECKLIST
-================================================
-
-Required Documents:
-${checklistItems.map(item => `☐ ${item.label}`).join('\n')}
-
-Application Steps:
-1. Register your residence (Anmeldung)
-2. Receive Tax ID automatically by mail
-3. No application needed for most cases
-
-Processing Time:
-- Usually 1-2 weeks after Anmeldung
-- Tax ID sent by mail to your registered address
-
-Important Information:
-- Tax ID is a 11-digit number
-- Keep it safe and use for all tax matters
-- Required for employment and banking
-- Valid for life
-
-Contact Information:
-- Bundeszentralamt für Steuern (BZSt)
-- Website: www.bzst.bund.de
-- Phone: +49 (0) 228 406-0
-
-Generated on: ${new Date().toLocaleDateString()}
-    `;
-
-    const element = document.createElement('a');
-    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(checklistText));
-    element.setAttribute('download', 'Tax-ID-Checklist.txt');
-    element.style.display = 'none';
-    document.body.appendChild(element);
-    element.click();
-    document.body.removeChild(element);
-  };
-
-  const completion = Math.round((checkedItems.size / checklistItems.length) * 100);
-
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="bg-card border-b border-border">
-        <div className="container py-8">
-          <Button variant="ghost" onClick={() => navigate('/dashboard')} className="mb-4">
-            ← Back to Dashboard
-          </Button>
-          <h1 className="text-4xl font-bold text-foreground mb-2">Tax ID Application Help</h1>
-          <p className="text-lg text-muted-foreground">
-            Complete guide to obtaining your Steueridentifikationsnummer
-          </p>
-        </div>
-      </header>
-
-      <main className="container py-12">
-        {/* Overview */}
-        <Card className="p-8 mb-12">
-          <h2 className="text-2xl font-bold text-foreground mb-4">What is Steueridentifikationsnummer?</h2>
-          <p className="text-foreground mb-4">
-            The Steueridentifikationsnummer (Tax ID) is an 11-digit number assigned to every person registered in Germany. 
-            It's used for all tax-related matters and is essential for employment, banking, and other administrative processes.
-          </p>
-          <p className="text-foreground mb-4">
-            Good news: You don't need to apply for it! The Tax ID is automatically assigned when you register your residence (Anmeldung) 
-            and sent to your address by mail within 1-2 weeks.
-          </p>
-          <div className="grid md:grid-cols-3 gap-4 mt-6">
-            <div className="p-4 bg-green-50 dark:bg-green-950/20 rounded-lg border border-green-200 dark:border-green-800">
-              <p className="font-semibold text-green-900 dark:text-green-200 mb-2">✓ Automatic</p>
-              <p className="text-sm text-green-800 dark:text-green-300">No application needed</p>
-            </div>
-            <div className="p-4 bg-green-50 dark:bg-green-950/20 rounded-lg border border-green-200 dark:border-green-800">
-              <p className="font-semibold text-green-900 dark:text-green-200 mb-2">✓ Free</p>
-              <p className="text-sm text-green-800 dark:text-green-300">No fees involved</p>
-            </div>
-            <div className="p-4 bg-green-50 dark:bg-green-950/20 rounded-lg border border-green-200 dark:border-green-800">
-              <p className="font-semibold text-green-900 dark:text-green-200 mb-2">✓ Lifelong</p>
-              <p className="text-sm text-green-800 dark:text-green-300">Valid for your entire life</p>
-            </div>
-          </div>
-        </Card>
-
-        {/* Preparation Checklist */}
-        <Card className="p-8 mb-12">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-bold text-foreground">Preparation Checklist</h2>
-            <Button onClick={downloadChecklist} variant="outline" size="sm">
-              <Download className="w-4 h-4 mr-2" />
-              Download
-            </Button>
-          </div>
-
-          <div className="mb-6">
-            <div className="h-2 bg-muted rounded-full overflow-hidden">
-              <div 
-                className="h-full bg-primary transition-all duration-300"
-                style={{ width: `${completion}%` }}
-              />
-            </div>
-            <p className="text-sm text-muted-foreground mt-2">
-              {completion}% of preparations complete
+    <ModuleShell
+      id="tax"
+      title="Steuer-ID & Steuern verstehen"
+      subtitle="Die steuerliche Identifikationsnummer und deine Steuerklasse"
+      introTitle="Was ist die Steuer-ID?"
+      intro={[
+        'Die Steuerliche Identifikationsnummer (Steuer-ID, TIN) ist eine elfstellige, lebenslang gültige Nummer, die du für alles Steuerliche in Deutschland brauchst: Arbeitgeber, Bank, Kindergeld, Steuererklärung.',
+        'Sie wird dir automatisch nach der Wohnsitzanmeldung vom Bundeszentralamt für Steuern per Post zugeschickt – meist innerhalb von 1–2 Wochen. Du musst nichts beantragen!',
+        'Nicht verwechseln mit der Steuernummer des Finanzamts: Die Steuer-ID bleibt immer gleich, die Steuernummer kann sich bei Umzug oder Arbeitgeberwechsel ändern.',
+      ]}
+      steps={[
+        {
+          title: 'Wohnung anmelden (Pflicht zuerst)',
+          description: 'Die Steuer-ID wird nach der Wohnsitzanmeldung automatisch vom Bundeszentralamt verschickt.',
+          details: 'Ohne Anmeldung keine Steuer-ID – die Post geht an deine Meldeadresse. Wenn du sie nach 2 Wochen nicht erhalten hast, kannst du beim BZSt nachfragen.',
+        },
+        {
+          title: 'Bescheid erhalten und aufbewahren',
+          description: 'Der Brief vom BZSt enthält deine Steuer-ID – speichere sie digital und schreib sie dir in deinen Pass.',
+          details: 'Die Nummer beginnt mit einer Zufallsziffer und endet mit einer Prüfziffer, z. B. „12 345 678 901“. Du wirst sie oft brauchen – Arbeitgeber, Banken, Versicherungen fragen regelmäßig danach.',
+        },
+        {
+          title: 'An den Arbeitgeber weitergeben',
+          description: 'Dein Arbeitgeber braucht die Steuer-ID, um dich beim Finanzamt für die Lohnsteuerkarte (ELStAM) zu registrieren.',
+          details: 'Ohne Steuer-ID wirst du automatisch in Steuerklasse VI eingestuft – dann zahlt du deutlich zu viel Lohnsteuer. Die Korrektur erfolgt automatisch nach Eingang der Nummer.',
+        },
+        {
+          title: 'Steuerklasse prüfen',
+          description: 'Die Steuerklasse beeinflusst, wie viel Lohnsteuer monatlich abgezogen wird.',
+          details: 'Verheiratete können die Klassenwahl optimieren (III/V oder IV mit Faktor). Wechsel beantragt man per Formular beim Finanzamt – seit 2020 ist der Wechsel mehrfach im Jahr möglich.',
+        },
+        {
+          title: 'Steuererklärung abgeben (ELSTER)',
+          description: 'Bis 31. Juli des Folgejahres kannst du freiwillig oder verpflichtend deine Steuererklärung einreichen.',
+          details: 'Für Arbeitnehmer mit einfacher Konstellation ist die Erklärung oft eine Rückerstattung wert (durchschnittlich ca. 1.000 €). Online über ELSTER oder per App (z. B. „SteuerSparErklärung“, WISO, Taxfix).',
+        },
+      ]}
+      checklist={[
+        { id: 'anmeldung', label: 'Wohnsitzanmeldung abgeschlossen' },
+        { id: 'steuerid', label: 'Steuer-ID vom BZSt erhalten (Brief ca. 1–2 Wochen nach Anmeldung)' },
+        { id: 'arbeitgeber', label: 'Steuer-ID an Arbeitgeber weitergegeben' },
+        { id: 'steuerklasse', label: 'Steuerklasse geprüft (verheiratet? III/IV/V optimieren?)' },
+        { id: 'elster', label: 'ELSTER-Konto für die Steuererklärung angelegt' },
+      ]}
+      tips={[
+        'Steuer-ID verloren? Beim Bundeszentralamt für Steuern unter 0228 / 406 – 1240 anrufen (Mo–Fr 8–18 Uhr) – mit Angabe von Name, Geburtsdatum und Anschrift bekommst du sie telefonisch.',
+        'Die Nummer steht auch auf deinem letzten Lohnsteuerabrechnungsblatt oder auf Briefen vom Finanzamt.',
+        'Für die Steuererklärung brauchst du: Lohnsteuerbescheinigung, Spendenquittungen, Nachweise über Handwerker- oder Pflegekosten.',
+        'Frist-Verlängerung: Wenn du einen Steuerberater beauftragst, verschiebt sich die Abgabefrist auf Ende Februar des übernächsten Jahres.',
+      ]}
+    >
+      <Card className="p-8">
+        <h2 className="text-2xl font-bold text-foreground mb-6">Steuer-ID verloren? So bekommst du sie wieder</h2>
+        <div className="grid md:grid-cols-2 gap-4 mb-8">
+          <div className="p-5 rounded-xl border-2 border-blue-200 dark:border-blue-800 bg-blue-50/50 dark:bg-blue-950/20">
+            <h3 className="font-bold text-foreground mb-2 flex items-center gap-2"><Phone className="w-4 h-4 text-primary" /> Bundeszentralamt für Steuern</h3>
+            <p className="text-sm text-muted-foreground mb-2">
+              Hotline für Steuer-ID-Rückfragen:
             </p>
+            <p className="font-semibold text-foreground">0228 / 406 – 1240</p>
+            <p className="text-xs text-muted-foreground mt-1">Mo–Fr 8–18 Uhr · Du brauchst Name, Geburtsdatum, Anschrift</p>
           </div>
+          <div className="p-5 rounded-xl border-2 border-purple-200 dark:border-purple-800 bg-purple-50/50 dark:bg-purple-950/20">
+            <h3 className="font-bold text-foreground mb-2 flex items-center gap-2"><FileText className="w-4 h-4 text-primary" /> Wo sonst nachsehen?</h3>
+            <ul className="text-sm text-muted-foreground space-y-1">
+              <li>• Lohnsteuerbescheinigung deines Arbeitgebers</li>
+              <li>• Briefe vom Finanzamt (Steuererklärung)</li>
+              <li>• Bescheid über Kindergeld oder BAföG</li>
+              <li>• Bestätigung der Krankenkasse (Manche Kassen zeigen sie in der App)</li>
+            </ul>
+          </div>
+        </div>
 
-          <div className="space-y-3">
-            {checklistItems.map((item) => (
-              <div 
-                key={item.id}
-                className="flex items-center gap-3 p-3 rounded-lg hover:bg-card/50 transition-colors cursor-pointer"
-                onClick={() => handleCheck(item.id)}
-              >
-                <input
-                  type="checkbox"
-                  checked={checkedItems.has(item.id)}
-                  onChange={() => handleCheck(item.id)}
-                  className="w-4 h-4"
-                />
-                <span className={checkedItems.has(item.id) ? 'line-through text-muted-foreground' : 'text-foreground'}>
-                  {item.label}
-                </span>
-              </div>
-            ))}
-          </div>
-        </Card>
-
-        {/* How to Get Tax ID */}
-        <Card className="p-8 mb-12">
-          <h2 className="text-2xl font-bold text-foreground mb-6">How to Get Your Tax ID</h2>
-          <div className="space-y-4">
-            {[
-              {
-                step: 1,
-                title: 'Register Your Residence (Anmeldung)',
-                description: 'Complete your Anmeldung at the local registration office within 14 days of arrival',
-                details: 'This is the most important step. Your Tax ID is automatically generated when you register.',
-              },
-              {
-                step: 2,
-                title: 'Wait for Mail',
-                description: 'The Tax ID will be sent to your registered address by mail',
-                details: 'Processing typically takes 1-2 weeks. The letter comes from the Bundeszentralamt für Steuern (BZSt).',
-              },
-              {
-                step: 3,
-                title: 'Receive Your Tax ID',
-                description: 'Your 11-digit Tax ID will be in the letter',
-                details: 'Keep this number safe. You\'ll need it for employment, banking, and tax purposes.',
-              },
-              {
-                step: 4,
-                title: 'Use Your Tax ID',
-                description: 'Provide it to your employer and bank',
-                details: 'Your employer needs it for payroll. Your bank may request it for account setup.',
-              },
-            ].map((item) => (
-              <div key={item.step} className="flex gap-4 p-4 border border-border rounded-lg">
-                <div className="flex-shrink-0">
-                  <div className="flex items-center justify-center h-10 w-10 rounded-full bg-primary text-primary-foreground font-bold">
-                    {item.step}
-                  </div>
-                </div>
-                <div className="flex-1">
-                  <p className="font-semibold text-foreground">{item.title}</p>
-                  <p className="text-sm text-muted-foreground mt-1">{item.description}</p>
-                  <p className="text-xs text-muted-foreground mt-2 italic">{item.details}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </Card>
-
-        {/* Important Information */}
-        <Card className="p-8 mb-12">
-          <h2 className="text-2xl font-bold text-foreground mb-6">Important Information</h2>
-          <div className="space-y-4">
-            <div className="p-4 border border-border rounded-lg">
-              <p className="font-semibold text-foreground mb-2">Format</p>
-              <p className="text-sm text-foreground">
-                11-digit number, for example: 12 345 678 901
-              </p>
-            </div>
-            <div className="p-4 border border-border rounded-lg">
-              <p className="font-semibold text-foreground mb-2">Validity</p>
-              <p className="text-sm text-foreground">
-                Your Tax ID is valid for your entire life and never changes
-              </p>
-            </div>
-            <div className="p-4 border border-border rounded-lg">
-              <p className="font-semibold text-foreground mb-2">Uses</p>
-              <p className="text-sm text-foreground">
-                Employment, banking, tax declarations, insurance, and all official matters
-              </p>
-            </div>
-            <div className="p-4 border border-border rounded-lg">
-              <p className="font-semibold text-foreground mb-2">Lost or Not Received</p>
-              <p className="text-sm text-foreground">
-                Contact the Bundeszentralamt für Steuern (BZSt) at +49 (0) 228 406-0 or visit www.bzst.bund.de
-              </p>
-            </div>
-          </div>
-        </Card>
-
-        {/* Official Resources */}
-        <Card className="p-8 mb-12">
-          <h2 className="text-2xl font-bold text-foreground mb-6">Official Resources</h2>
-          <div className="grid md:grid-cols-2 gap-4">
-            <a 
-              href="https://www.bzst.bund.de/" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="p-4 border border-border rounded-lg hover:bg-card/50 transition-colors"
-            >
-              <p className="font-semibold text-foreground">Bundeszentralamt für Steuern</p>
-              <p className="text-sm text-muted-foreground mt-1">Official German tax authority website</p>
-            </a>
-            <a 
-              href="https://www.make-it-in-germany.com/" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="p-4 border border-border rounded-lg hover:bg-card/50 transition-colors"
-            >
-              <p className="font-semibold text-foreground">Make it in Germany</p>
-              <p className="text-sm text-muted-foreground mt-1">Government information portal for newcomers</p>
-            </a>
-          </div>
-        </Card>
-
-        {/* Pro Tips */}
-        <Card className="p-8 bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800">
-          <div className="flex gap-3">
-            <AlertCircle className="w-6 h-6 text-blue-600 dark:text-blue-400 flex-shrink-0 mt-0.5" />
-            <div>
-              <p className="font-semibold text-blue-900 dark:text-blue-200 mb-3">Pro Tips</p>
-              <ul className="space-y-2 text-sm text-blue-800 dark:text-blue-300">
-                <li>• Complete your Anmeldung as soon as possible after arrival</li>
-                <li>• Keep your Tax ID letter in a safe place</li>
-                <li>• You may need to provide it to your employer before your first day</li>
-                <li>• If you don't receive it within 3 weeks, contact BZSt</li>
-                <li>• Your Tax ID is different from your social security number</li>
-              </ul>
-            </div>
-          </div>
-        </Card>
-      </main>
-    </div>
+        <h3 className="font-semibold text-foreground mb-4">Offizielle Quellen</h3>
+        <div className="grid md:grid-cols-2 gap-4">
+          <a href="https://www.bzst.de/" target="_blank" rel="noopener noreferrer" className="p-4 border border-border rounded-lg hover:bg-card/50 transition-colors">
+            <p className="font-semibold text-foreground flex items-center gap-2">Bundeszentralamt für Steuern <ExternalLink className="w-3.5 h-3.5" /></p>
+            <p className="text-sm text-muted-foreground mt-1">Zuständige Behörde für die Steuer-ID</p>
+          </a>
+          <a href="https://www.elster.de/" target="_blank" rel="noopener noreferrer" className="p-4 border border-border rounded-lg hover:bg-card/50 transition-colors">
+            <p className="font-semibold text-foreground flex items-center gap-2">ELSTER <ExternalLink className="w-3.5 h-3.5" /></p>
+            <p className="text-sm text-muted-foreground mt-1">Offizielles Online-Portal für die Steuererklärung</p>
+          </a>
+        </div>
+      </Card>
+    </ModuleShell>
   );
 }

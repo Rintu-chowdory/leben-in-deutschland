@@ -3,204 +3,230 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useLocation } from "wouter";
 import { trpc } from "@/lib/trpc";
-import { Loader2, LogOut, BookOpen, DollarSign, Heart, FileText, GraduationCap, Landmark, CheckCircle2, Clock } from "lucide-react";
+import { useEffect, useState } from "react";
+import {
+  BookOpen, DollarSign, FileText, GraduationCap, Heart, Landmark,
+  Calculator, GraduationCap as QuizIcon, TrendingUp, Trophy, Clock, LogOut,
+} from "lucide-react";
+import { getQuizStat, moduleCompletion, overallCompletion } from "@/lib/progress";
 
 const modules = [
-  { id: 'anmeldung', name: 'Anmeldung', icon: Landmark, description: 'German registration' },
-  { id: 'bank', name: 'Bank Account', icon: DollarSign, description: 'Bank setup guide' },
-  { id: 'health', name: 'Health Insurance', icon: Heart, description: 'Insurance comparison' },
-  { id: 'visa', name: 'Visa & Permits', icon: FileText, description: 'Residence permits' },
-  { id: 'integration', name: 'Integration Courses', icon: GraduationCap, description: 'Course finder' },
-  { id: 'tax', name: 'Tax ID', icon: BookOpen, description: 'Steueridentifikationsnummer' },
+  { id: 'anmeldung', name: 'Anmeldung', icon: Landmark, description: 'Wohnung anmelden – Schritt für Schritt', total: 5, path: '/module/anmeldung' },
+  { id: 'bank', name: 'Bankkonto', icon: DollarSign, description: 'Kontoeröffnung & Bankvergleich', total: 5, path: '/module/bank' },
+  { id: 'health', name: 'Krankenversicherung', icon: Heart, description: 'GKV vs. PKV im Vergleich', total: 4, path: '/module/health' },
+  { id: 'visa', name: 'Visum & Aufenthalt', icon: FileText, description: 'Aufenthaltstitel & Verlängerung', total: 5, path: '/module/visa' },
+  { id: 'integration', name: 'Integrationskurse', icon: GraduationCap, description: 'Kurse finden & anmelden', total: 4, path: '/module/integration' },
+  { id: 'tax', name: 'Steuer-ID', icon: BookOpen, description: 'Steuerliche Identifikationsnummer', total: 5, path: '/module/tax' },
 ];
+
+const tools = [
+  {
+    name: 'Einbürgerungstest-Trainer',
+    icon: QuizIcon,
+    description: '30 offizielle Prüfungsfragen – übe für „Leben in Deutschland“',
+    path: '/werkzeuge/einbuergerungstest',
+  },
+  {
+    name: 'Fristen-Rechner',
+    icon: Calculator,
+    description: 'Wichtige Fristen nach Umzug, Geburt & Co. im Blick behalten',
+    path: '/werkzeuge/fristenrechner',
+  },
+];
+
+function ProgressRing({ pct }: { pct: number }) {
+  const r = 52;
+  const c = 2 * Math.PI * r;
+  return (
+    <svg width="140" height="140" viewBox="0 0 140 140" className="-rotate-90">
+      <circle cx="70" cy="70" r={r} fill="none" strokeWidth="10" className="stroke-muted" />
+      <circle
+        cx="70" cy="70" r={r} fill="none" strokeWidth="10" strokeLinecap="round"
+        stroke="url(#ringGrad)"
+        strokeDasharray={c}
+        strokeDashoffset={c - (c * pct) / 100}
+        style={{ transition: 'stroke-dashoffset 0.8s ease' }}
+      />
+      <defs>
+        <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#2563eb" />
+          <stop offset="100%" stopColor="#9333ea" />
+        </linearGradient>
+      </defs>
+    </svg>
+  );
+}
 
 export default function Dashboard() {
   const { user, logout, isAuthenticated } = useAuth();
   const [, navigate] = useLocation();
+  const [tick, setTick] = useState(0);
 
-  const { data: allProgress } = trpc.moduleProgress.getAll.useQuery(undefined, {
-    enabled: isAuthenticated,
-  });
+  useEffect(() => {
+    const onChange = () => setTick((t) => t + 1);
+    window.addEventListener('lid-progress-changed', onChange);
+    return () => window.removeEventListener('lid-progress-changed', onChange);
+  }, []);
+
   const { data: subscription } = trpc.subscription.getOrCreate.useQuery(undefined, {
     enabled: isAuthenticated,
   });
 
-  if (!isAuthenticated) {
-    navigate('/');
-    return null;
-  }
+  const totals = Object.fromEntries(modules.map((m) => [m.id, m.total]));
+  const total = overallCompletion(totals);
+  const quiz = getQuizStat();
+  void tick; // Neu-Render bei Fortschrittsänderung
 
   const handleLogout = async () => {
     await logout();
     navigate('/');
   };
 
-  const getModuleProgress = (moduleId: string) => {
-    return allProgress?.find(p => p.moduleName === moduleId) || null;
-  };
-
-  const totalCompletion = allProgress && allProgress.length > 0 ? Math.round(allProgress.reduce((sum, p) => sum + p.completionPercentage, 0) / allProgress.length) : 0;
+  const today = new Date().toLocaleDateString('de-DE', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
-      {/* Header */}
-      <header className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white border-b border-blue-200 sticky top-0 z-40 shadow-lg">
-        <div className="container flex items-center justify-between h-16">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50/40 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
+      {/* Kopf */}
+      <header className="border-b border-border bg-card/80 backdrop-blur-sm sticky top-0 z-40">
+        <div className="container py-5 flex items-center justify-between flex-wrap gap-3">
           <div>
-            <h1 className="text-3xl font-bold text-white">Dashboard</h1>
-            <p className="text-sm text-white/80">Welcome back, {user?.name || user?.email}</p>
+            <h1 className="text-2xl md:text-3xl font-bold text-foreground">
+              Willkommen zurück{user?.name ? `, ${user.name}` : ''} 👋
+            </h1>
+            <p className="text-sm text-muted-foreground">{today}</p>
           </div>
-          <div className="flex items-center gap-4">
-            <div className="text-right bg-white/10 backdrop-blur-sm px-4 py-2 rounded-lg">
-              <p className="text-sm font-semibold text-white">
-                {subscription?.tier === 'premium' ? '✨ Premium' : 'Free Plan'}
-              </p>
-              <p className="text-xs text-white/70">
-                {subscription?.tier === 'free' && 'Upgrade for more features'}
-              </p>
-            </div>
-            <Button variant="secondary" size="sm" onClick={handleLogout} className="bg-white text-purple-600 hover:bg-gray-100">
-              <LogOut className="w-4 h-4 mr-2" />
-              Logout
-            </Button>
+          <div className="flex items-center gap-3">
+            {isAuthenticated && subscription && (
+              <span className="text-xs font-semibold px-3 py-1.5 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+                {subscription.tier === 'premium' ? '✨ Premium' : 'Kostenlos'}
+              </span>
+            )}
+            {isAuthenticated ? (
+              <Button variant="outline" size="sm" onClick={handleLogout}>
+                <LogOut className="w-4 h-4 mr-1" /> Abmelden
+              </Button>
+            ) : (
+              <span className="text-xs text-muted-foreground">Gast-Modus · Fortschritt wird lokal gespeichert</span>
+            )}
           </div>
         </div>
       </header>
 
-      <main className="container py-8">
-        {/* Overall Progress */}
-        <Card className="p-8 mb-8 bg-gradient-to-br from-white to-blue-50 border-2 border-blue-200 shadow-lg hover:shadow-xl transition-all">
-          <h2 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-6">Your Progress</h2>
-          <div className="flex items-center gap-8">
-            <div className="flex-1">
-              <div className="h-5 bg-gray-200 rounded-full overflow-hidden shadow-md">
-                <div 
-                  className="h-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 transition-all duration-500 shadow-lg"
-                  style={{ width: `${totalCompletion}%` }}
-                />
+      <main className="container py-8 space-y-8">
+        {/* Übersicht */}
+        <div className="grid gap-6 md:grid-cols-3">
+          <Card className="p-6 flex items-center gap-6">
+            <div className="relative flex-shrink-0">
+              <ProgressRing pct={total} />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <span className="text-2xl font-bold text-foreground">{total}%</span>
               </div>
-              <p className="text-sm text-muted-foreground mt-2">
-                {totalCompletion}% complete across all modules
+            </div>
+            <div>
+              <div className="flex items-center gap-2 mb-1">
+                <TrendingUp className="w-4 h-4 text-primary" />
+                <h3 className="font-semibold text-foreground">Gesamtfortschritt</h3>
+              </div>
+              <p className="text-sm text-muted-foreground">
+                über alle 6 Module deines Ankommens in Deutschland
               </p>
             </div>
-            <div className="text-right">
-              <p className="text-4xl font-bold text-primary">{totalCompletion}%</p>
-              <p className="text-sm text-muted-foreground">Overall</p>
+          </Card>
+
+          <Card className="p-6 flex flex-col justify-between">
+            <div className="flex items-center gap-2 mb-2">
+              <Trophy className="w-5 h-5 text-amber-500" />
+              <h3 className="font-semibold text-foreground">Einbürgerungstest</h3>
             </div>
-          </div>
-        </Card>
+            <div>
+              <p className="text-3xl font-bold text-foreground">
+                {quiz.bestScore}<span className="text-base text-muted-foreground">%</span>
+              </p>
+              <p className="text-sm text-muted-foreground mt-1">
+                {quiz.attempts > 0
+                  ? `${quiz.attempts} Versuche · letztes Ergebnis: ${quiz.lastScore}%`
+                  : 'Noch nicht gespielt – jetzt üben!'}
+              </p>
+              <Button size="sm" className="mt-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white" onClick={() => navigate('/werkzeuge/einbuergerungstest')}>
+                Quiz starten
+              </Button>
+            </div>
+          </Card>
 
-        {/* Modules Grid */}
-        <div className="mb-8">
-          <h2 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-8">Your Modules</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {modules.map((module) => {
-              const Icon = module.icon;
-              const progress = getModuleProgress(module.id);
-              const completion = progress?.completionPercentage || 0;
+          <Card className="p-6 flex flex-col justify-between">
+            <div className="flex items-center gap-2 mb-2">
+              <Clock className="w-5 h-5 text-red-500" />
+              <h3 className="font-semibold text-foreground">Fristen im Blick</h3>
+            </div>
+            <p className="text-sm text-muted-foreground">
+              Anmeldung nach Umzug? Ummeldung des Autos? Behalte wichtige Fristen im Blick – der Rechner rechnet sie dir aus.
+            </p>
+            <Button size="sm" variant="outline" className="mt-3 w-fit" onClick={() => navigate('/werkzeuge/fristenrechner')}>
+              Fristen berechnen
+            </Button>
+          </Card>
+        </div>
 
-              const moduleRoutes: { [key: string]: string } = {
-                'anmeldung': '/module/anmeldung',
-                'bank': '/module/bank',
-                'health': '/module/health',
-                'visa': '/module/visa',
-                'integration': '/module/integration',
-                'tax': '/module/tax',
-              };
-
-              const gradients = ['gradient-card-1', 'gradient-card-2', 'gradient-card-3', 'gradient-card-4', 'gradient-card-5', 'gradient-card-6'];
-              const gradientClass = gradients[modules.indexOf(module) % gradients.length];
-              
+        {/* Module */}
+        <section>
+          <h2 className="text-xl font-bold text-foreground mb-4">Meine Module</h2>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {modules.map((m) => {
+              const pct = moduleCompletion(m.id, m.total);
+              const Icon = m.icon;
               return (
-                <Card 
-                  key={module.id} 
-                  className={`p-6 ${completion === 100 ? gradientClass : 'bg-white border-2 border-gray-200'} hover:shadow-xl transition-all cursor-pointer transform hover:scale-105 hover-lift`}
-                  onClick={() => navigate(moduleRoutes[module.id] || '/dashboard')}
+                <Card
+                  key={m.id}
+                  className="p-5 cursor-pointer hover:shadow-lg hover:border-primary/40 transition-all group"
+                  onClick={() => navigate(m.path)}
                 >
-                  <div className="flex items-start justify-between mb-4">
-                    <Icon className={`w-8 h-8 ${completion === 100 ? 'text-white drop-shadow-lg' : 'text-blue-600'}`} />
-                    {completion === 100 && (
-                      <CheckCircle2 className="w-5 h-5 text-white drop-shadow-lg" />
-                    )}
-                  </div>
-                  <h3 className={`text-lg font-semibold mb-1 ${completion === 100 ? 'text-white' : 'text-gray-900'}`}>
-                    {module.name}
-                  </h3>
-                  <p className={`text-sm mb-4 ${completion === 100 ? 'text-white/90' : 'text-gray-600'}`}>
-                    {module.description}
-                  </p>
-                  <div className="space-y-2">
-                    <div className={`h-3 rounded-full overflow-hidden ${completion === 100 ? 'bg-white/30' : 'bg-gray-200'}`}>
-                      <div 
-                        className={`h-full transition-all duration-300 ${completion === 100 ? 'bg-white shadow-lg' : 'bg-gradient-to-r from-blue-500 to-purple-500'}`}
-                        style={{ width: `${completion}%` }}
-                      />
+                  <div className="flex items-start justify-between mb-3">
+                    <div className="h-11 w-11 rounded-xl bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center">
+                      <Icon className="w-5 h-5 text-white" />
                     </div>
-                    <p className={`text-xs font-semibold ${completion === 100 ? 'text-white/80' : 'text-gray-600'}`}>
-                      {completion}% complete
-                    </p>
+                    <span className="text-sm font-semibold text-primary">{pct}%</span>
+                  </div>
+                  <h3 className="font-semibold text-foreground mb-1 group-hover:text-primary transition-colors">{m.name}</h3>
+                  <p className="text-sm text-muted-foreground mb-3">{m.description}</p>
+                  <div className="h-1.5 rounded-full bg-muted overflow-hidden">
+                    <div
+                      className="h-full rounded-full bg-gradient-to-r from-blue-600 to-purple-600 transition-all duration-500"
+                      style={{ width: `${pct}%` }}
+                    />
                   </div>
                 </Card>
               );
             })}
           </div>
-        </div>
+        </section>
 
-        {/* Quick Stats */}
-        <div className="grid md:grid-cols-3 gap-6">
-          <Card className="p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-muted-foreground">Modules Started</p>
-                <p className="text-3xl font-bold text-foreground">
-                  {allProgress?.length || 0}
-                </p>
-              </div>
-              <Clock className="w-8 h-8 text-primary opacity-50" />
-            </div>
-          </Card>
-          <Card className="p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-muted-foreground">Completed</p>
-                <p className="text-3xl font-bold text-foreground">
-                  {allProgress?.filter(p => p.completionPercentage === 100).length || 0}
-                </p>
-              </div>
-              <CheckCircle2 className="w-8 h-8 text-green-500 opacity-50" />
-            </div>
-          </Card>
-          <Card className="p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-muted-foreground">Saved Resources</p>
-                <p className="text-3xl font-bold text-foreground">
-                  {allProgress?.reduce((sum, p) => sum + (p.savedResources?.length || 0), 0) || 0}
-                </p>
-              </div>
-              <BookOpen className="w-8 h-8 text-primary opacity-50" />
-            </div>
-          </Card>
-        </div>
-
-        {/* Premium CTA */}
-        {subscription?.tier === 'free' && (
-          <Card className="p-8 mt-8 bg-gradient-to-r from-primary/10 to-accent/10 border-primary/20">
-            <div className="flex items-center justify-between">
-              <div>
-                <h3 className="text-xl font-bold text-foreground mb-2">
-                  Unlock Premium Features
-                </h3>
-                <p className="text-muted-foreground">
-                  Get priority support, advanced analytics, and exclusive resources
-                </p>
-              </div>
-              <Button onClick={() => navigate('/pricing')}>
-                Upgrade to Premium
-              </Button>
-            </div>
-          </Card>
-        )}
+        {/* Werkzeuge */}
+        <section>
+          <h2 className="text-xl font-bold text-foreground mb-4">Werkzeuge & Trainer</h2>
+          <div className="grid gap-4 sm:grid-cols-2">
+            {tools.map((t) => {
+              const Icon = t.icon;
+              return (
+                <Card
+                  key={t.path}
+                  className="p-6 cursor-pointer hover:shadow-lg hover:border-primary/40 transition-all group relative overflow-hidden"
+                  onClick={() => navigate(t.path)}
+                >
+                  <div className="absolute -right-8 -top-8 w-32 h-32 rounded-full bg-gradient-to-br from-blue-500/10 to-purple-500/10" />
+                  <div className="flex items-center gap-4 relative">
+                    <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center flex-shrink-0">
+                      <Icon className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors">{t.name}</h3>
+                      <p className="text-sm text-muted-foreground">{t.description}</p>
+                    </div>
+                  </div>
+                </Card>
+              );
+            })}
+          </div>
+        </section>
       </main>
     </div>
   );

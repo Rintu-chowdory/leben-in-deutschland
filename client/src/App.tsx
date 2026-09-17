@@ -12,6 +12,8 @@ import HealthInsuranceModule from "./pages/HealthInsuranceModule";
 import VisaModule from "./pages/VisaModule";
 import IntegrationCoursesModule from "./pages/IntegrationCoursesModule";
 import TaxIDModule from "./pages/TaxIDModule";
+import Einbuergerungstest from "./pages/tools/Einbuergerungstest";
+import Fristenrechner from "./pages/tools/Fristenrechner";
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
@@ -25,6 +27,8 @@ function Router() {
       <Route path={"/module/visa"} component={VisaModule} />
       <Route path={"/module/integration"} component={IntegrationCoursesModule} />
       <Route path={"/module/tax"} component={TaxIDModule} />
+      <Route path={"/werkzeuge/einbuergerungstest"} component={Einbuergerungstest} />
+      <Route path={"/werkzeuge/fristenrechner"} component={Fristenrechner} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
