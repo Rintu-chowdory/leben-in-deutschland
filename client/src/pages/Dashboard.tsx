@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import {
   BookOpen, DollarSign, FileText, GraduationCap, Heart, Landmark,
   Calculator, GraduationCap as QuizIcon, TrendingUp, Trophy, Clock, LogOut,
+  Wallet, ScanText, Mail, CalendarHeart,
 } from "lucide-react";
 import { getQuizStat, moduleCompletion, overallCompletion } from "@/lib/progress";
 
@@ -31,6 +32,30 @@ const tools = [
     icon: Calculator,
     description: 'Wichtige Fristen nach Umzug, Geburt & Co. im Blick behalten',
     path: '/werkzeuge/fristenrechner',
+  },
+  {
+    name: 'Brutto-Netto-Rechner',
+    icon: Wallet,
+    description: 'Was bleibt vom Gehalt übrig? Abzüge auf einen Blick',
+    path: '/werkzeuge/gehaltsrechner',
+  },
+  {
+    name: 'Amtsdeutsch-Dekodierer',
+    icon: ScanText,
+    description: 'Behördenbrief einfügen – schwerste Wörter werden normal erklärt',
+    path: '/werkzeuge/amtsdeutsch',
+  },
+  {
+    name: 'Behördenbrief-Generator',
+    icon: Mail,
+    description: 'Fertige Briefe für Anmeldung, Widerspruch, Kündigung & Co.',
+    path: '/werkzeuge/brief-generator',
+  },
+  {
+    name: 'Feiertags-Check',
+    icon: CalendarHeart,
+    description: 'Feiertage in deinem Bundesland – mit Countdown',
+    path: '/werkzeuge/feiertage',
   },
 ];
 

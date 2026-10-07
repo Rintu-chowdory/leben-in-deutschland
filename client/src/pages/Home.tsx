@@ -5,6 +5,7 @@ import { useLocation } from "wouter";
 import {
   BookOpen, DollarSign, FileText, GraduationCap, Heart, Landmark,
   ArrowRight, Sparkles, GraduationCap as QuizIcon, Calculator, CheckCircle2,
+  Wallet, ScanText, Mail, CalendarHeart,
 } from "lucide-react";
 
 export default function Home() {
@@ -23,6 +24,10 @@ export default function Home() {
   const tools = [
     { icon: QuizIcon, title: "Einbürgerungstest-Trainer", description: "30 Prüfungsfragen mit Erklärungen – übe für „Leben in Deutschland“", path: "/werkzeuge/einbuergerungstest" },
     { icon: Calculator, title: "Fristen-Rechner", description: "Anmelde-, Ummelde- und Antragsfristen automatisch berechnen", path: "/werkzeuge/fristenrechner" },
+    { icon: Wallet, title: "Brutto-Netto-Rechner", description: "Was bleibt vom Gehalt übrig? Steuer- und Sozialabzüge im Blick", path: "/werkzeuge/gehaltsrechner" },
+    { icon: ScanText, title: "Amtsdeutsch-Dekodierer", description: "Behördenbrief einfügen – und Amtsdeutsch wird normal erklärt", path: "/werkzeuge/amtsdeutsch" },
+    { icon: Mail, title: "Behördenbrief-Generator", description: "Fertige Briefe für Anmeldung, Widerspruch, Kündigung & Co.", path: "/werkzeuge/brief-generator" },
+    { icon: CalendarHeart, title: "Feiertags-Check", description: "Wann ist in deinem Bundesland frei? Mit Countdown", path: "/werkzeuge/feiertage" },
   ];
 
   return (
@@ -120,7 +125,7 @@ export default function Home() {
               Praktische Helfer, die direkt im Browser laufen – ohne Anmeldung, ohne Wartezeit.
             </p>
           </div>
-          <div className="grid gap-6 max-w-3xl mx-auto md:grid-cols-2">
+          <div className="grid gap-6 max-w-5xl mx-auto md:grid-cols-2 lg:grid-cols-3">
             {tools.map((t) => {
               const Icon = t.icon;
               return (

@@ -14,6 +14,10 @@ import IntegrationCoursesModule from "./pages/IntegrationCoursesModule";
 import TaxIDModule from "./pages/TaxIDModule";
 import Einbuergerungstest from "./pages/tools/Einbuergerungstest";
 import Fristenrechner from "./pages/tools/Fristenrechner";
+import Gehaltsrechner from "./pages/tools/Gehaltsrechner";
+import Amtsdeutsch from "./pages/tools/Amtsdeutsch";
+import BriefGenerator from "./pages/tools/BriefGenerator";
+import Feiertage from "./pages/tools/Feiertage";
 
 function Routes() {
   return (
@@ -28,6 +32,10 @@ function Routes() {
       <Route path={"/module/tax"} component={TaxIDModule} />
       <Route path={"/werkzeuge/einbuergerungstest"} component={Einbuergerungstest} />
       <Route path={"/werkzeuge/fristenrechner"} component={Fristenrechner} />
+      <Route path={"/werkzeuge/gehaltsrechner"} component={Gehaltsrechner} />
+      <Route path={"/werkzeuge/amtsdeutsch"} component={Amtsdeutsch} />
+      <Route path={"/werkzeuge/brief-generator"} component={BriefGenerator} />
+      <Route path={"/werkzeuge/feiertage"} component={Feiertage} />
       <Route path={"/404"} component={NotFound} />
       {/* Fallback-Route */}
       <Route component={NotFound} />
